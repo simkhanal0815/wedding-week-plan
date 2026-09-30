@@ -1,0 +1,129 @@
+{
+  "note": "Curated open questions for the shared site, grouped by vendor. Edit here, then run node site/build.mjs.",
+  "vendors": [
+    {
+      "who": "Priya",
+      "role": "Destawed — planning and resort coordination",
+      "questions": [
+        {
+          "q": "Which event-hours rule applies to us at 212 room nights?",
+          "context": "The planning timeline ties event hours to 300 or more room nights. The Sep 10 rooming list has 131 booked passengers across 59 rooms and 212 room nights, with about 120 adults."
+        },
+        {
+          "q": "Which bridal mehndi date is actually booked?",
+          "context": "The planning timeline has it Oct 22 in the early morning with Oct 21 recommended. The hair and makeup notes and the Jakobz Media run-through both have it Fri Oct 23, 8:00 AM to 12:00 PM. It changes whether the mehndi is still drying during sangeet hair and makeup."
+        },
+        {
+          "q": "What is the resort's real cutoff for finalizing menus?",
+          "context": "No cutoff date exists anywhere in our files. We are working to Sep 30 as a guess because the menus gate the kitchen."
+        },
+        {
+          "q": "Did the room request sheet come through?",
+          "context": "The timeline has us sending it 30 days before departure, which was around Sep 20."
+        },
+        {
+          "q": "Are there other spots on the property we could shoot before the sun is up?",
+          "context": "Saturday's pre-ceremony shoot starts at 6:15 AM and sunrise is 6:46 AM, so the first half hour is dark. We would rather use that time somewhere that works than lose it."
+        },
+        {
+          "q": "Is 6:15 to 8:35 AM enough for a bridal shoot, a groom shoot and couple portraits, and how long would you allow for each?",
+          "context": "We want solo coverage of Simran without Prat and of Prat without Simran, plus the couple portraits, on top of the first looks and family photos already in that window."
+        },
+        {
+          "q": "Where do the four jaimalas sit before the Swyambar, who hands them over, and do we need trays?",
+          "context": "Decor is supplying four garlands, two for each side, but nothing says where they wait or who presents them."
+        },
+        {
+          "q": "Can we have a handful of loose petals set aside for two trays?",
+          "context": "Simran's mom wants to decorate the silver tray for the rings and the silver plate for the barat welcome aarti. Small enough that it shouldn't affect any quantities."
+        },
+        {
+          "q": "Can the resort or the florist supply fresh flowers for the hair on Friday and Saturday?",
+          "context": "Claudio's plan has flowers in the hair for the sangeet and fresh flowers in the ceremony bun. Fresh means sourcing locally rather than flying them down."
+        },
+        {
+          "q": "Which room is the getting-ready suite?",
+          "context": "Claudio's itinerary lists it as to be confirmed. His notes put it on the first floor near Kanna Club, and he arrives at 3:00 AM on Oct 24 to set up."
+        }
+      ]
+    },
+    {
+      "who": "Jakobz Media",
+      "role": "Photo and video",
+      "questions": [
+        {
+          "q": "How many photographers and videographers are on each day, and do our covered hours fit?",
+          "context": "Friday runs 10:15 AM to 10:00 PM and Saturday runs from 5:30 AM through the reception. Covered hours are blank in the timeline. We also need to know when reception coverage ends, since the dance floor opens at 10:05 PM."
+        },
+        {
+          "q": "What arrival time do you need on Saturday morning to get reaction footage of Mumum, Bobbu Annie and Baba Annie?",
+          "context": "Hair and makeup runs 3:30 to 5:30 AM and the bindi and shawl pinning is 5:30 to 6:00. The plan has you arriving 5:45, which leaves 15 minutes that is already spoken for."
+        },
+        {
+          "q": "Is a 6:00 AM start what you want for the sunrise e-shoot on Oct 21?",
+          "context": "Sunrise is 6:45 AM, so the first 45 minutes are before the sun is up. Either that is a deliberate blue hour choice, or a 6:00 AM call with a 6:25 to 7:15 shoot works better."
+        },
+        {
+          "q": "Does 50 minutes work for the first look with Prat and couple portraits, and are 30 and 25 minutes enough for bridal party and close family?",
+          "context": "The window is 6:35 to 7:25 AM around sunrise, then 15 minutes of private vows, then bridal party 7:40 to 8:10 and close family 8:10 to 8:35. Tell us if you want a shot list of family groupings."
+        },
+        {
+          "q": "Will you film the private vows, and who covers Prat getting ready and the baraat?",
+          "context": "Private vows are 7:25 to 7:40 AM. The baraat is 9:00 to 9:30 while Simran is out of sight."
+        },
+        {
+          "q": "Where will you stand on Kanna Bridge for the entrances, thaali, Sath Phera and exit?",
+          "context": "The ceremony runs 9:45 to 11:56 AM."
+        },
+        {
+          "q": "For the same-day edit: who cuts it, what is the footage cutoff, and when does it reach AV?",
+          "context": "It screens at 9:45 PM at the reception, so someone has to break off to edit."
+        },
+        {
+          "q": "What is the lighting plan for the reception couple portraits?",
+          "context": "They run 7:00 to 7:45 PM and sunset is 6:18 PM, so it will be dark."
+        },
+        {
+          "q": "Who does hair and makeup for the two e-shoots?",
+          "context": "Both currently assume Simran does her own. Claudio is only on the property Oct 22 to 24, so he is not there for either."
+        }
+      ]
+    },
+    {
+      "who": "Bernardo",
+      "role": "Priest",
+      "questions": [
+        {
+          "q": "Are you bringing the white grains for the Sath Phera?",
+          "context": "Not yet asked. The priest hands them to the tholan and tholi, who place them in our hands to toss into the fire. Nobody owns this item yet.",
+          "status": "Not yet asked"
+        },
+        {
+          "q": "Are you bringing abir, the red tikka powder?",
+          "context": "Simran's family is bringing a small plate for tikka but no powder is assigned.",
+          "status": "Not yet asked"
+        },
+        {
+          "q": "Can you bring the Ganesh murti for the puja on the mandap?",
+          "context": "The decor quote covers a gold Ganesh statue for the welcome table. The one used in the puja is the one we need from you.",
+          "status": "Not yet asked"
+        },
+        {
+          "q": "Rice and turmeric, if mixing a small amount into the petals is approved.",
+          "context": "You had no objection to a small amount. We still need the resort to approve mixing it in.",
+          "status": "Not yet asked"
+        },
+        {
+          "q": "Brass rather than stainless for everything you bring.",
+          "context": "Simran's mom prefers brass for the water pot and all the items you carry. Asked Sep 24, waiting on the reply.",
+          "status": "Asked Sep 24"
+        },
+        {
+          "q": "Do you still want a practice run-through, and on what date and time?",
+          "context": "You proposed the morning of Fri Oct 23, but bridal mehndi runs 8:00 AM to 12:00 PM that day and the sangeet is that evening. We also do not have a hotel room booked for you, so you may not be on the property the night before. Thursday Oct 22 before 4:00 PM hair and makeup looks like the realistic window.",
+          "status": "Asked Sep 24"
+        }
+      ]
+    }
+  ]
+}
