@@ -220,6 +220,13 @@ footer { color: var(--t3); font-size: 12px; border-top: 1px solid var(--s3); pad
 body.editing [contenteditable="true"] { outline: 1px dashed #b45309; outline-offset: 2px;
   border-radius: 3px; min-width: 28px; display: inline-block; }
 body.editing [contenteditable="true"]:focus { outline: 2px solid #059669; background: rgba(5,150,105,.08); }
+body.editing .wkblk { cursor: text; }
+.dtedit .dtlabel { font-size: 10px; letter-spacing: .6px; text-transform: uppercase;
+  color: var(--t3); margin: 10px 0 2px; }
+.dtedit .dtlabel:first-child { margin-top: 0; }
+.dtedit .rtime, .dtedit .rwhat { display: block; font-size: 13px; }
+.dttail { margin-top: 12px; padding-top: 10px; border-top: 1px solid var(--line);
+  white-space: pre-line; color: var(--t2); }
 
 @media (max-width: 820px) {
   .rowhead, .drow { grid-template-columns: 1fr; gap: 2px; }
@@ -239,6 +246,7 @@ body.editing [contenteditable="true"]:focus { outline: 2px solid #059669; backgr
     <span class="grow"><b>Edit mode.</b> <span id="estat">No changes yet.</span></span>
     <button type="button" id="enotice">Banner</button>
     <button type="button" id="ediscard">Discard</button>
+    <button type="button" id="eoff">Exit</button>
     <button type="button" id="epublish" class="primary" disabled>Publish</button>
   </div>
   <div id="notice" hidden></div>
@@ -570,29 +578,29 @@ body.editing [contenteditable="true"]:focus { outline: 2px solid #059669; backgr
       <div class="track"><div class="trackbar"><div class="blk blk-prep" style="left:0%;width:calc(10% - 0%)" title="Travel">Travel</div><div class="blk blk-shoot" style="left:10%;width:calc(36.666666666666664% - 10%)" title="Prat">Prat</div><div class="blk blk-shoot" style="left:36.666666666666664%;width:calc(46.666666666666664% - 36.666666666666664%)" title="Vows">Vows</div><div class="blk blk-shoot" style="left:46.666666666666664%;width:calc(60% - 46.666666666666664%)" title="Dad + uncles">Dad + uncles</div><div class="blk blk-shoot" style="left:60%;width:calc(80% - 60%)" title="Close family">Close family</div><div class="blk blk-shoot" style="left:80%;width:calc(100% - 80%)" title="Bridal party">Bridal party</div></div><div class="ticks"><span class="tick" style="left:0%">6:30</span><span class="tick" style="left:10%">6:45</span><span class="tick" style="left:20%">7 AM</span><span class="tick" style="left:30%">7:15</span><span class="tick" style="left:40%">7:30</span><span class="tick" style="left:50%">7:45</span><span class="tick" style="left:60%">8 AM</span><span class="tick" style="left:70%">8:15</span><span class="tick" style="left:80%">8:30</span><span class="tick" style="left:90%">8:45</span><span class="tick" style="left:100%">9 AM</span></div></div>
       <p class="t-ter small">Blue blocks are the moments photo and video must capture, gray is the travel down. Axis: 6:30 AM to 9:00 AM.</p>
       <div class="subrows">
-        <div class="srow" data-who="Simran|Prat|Jakobz Media">
-              <span class="t-sec">6:45 AM – 7:25 AM (40 min)</span>
-              <span>First look with Prat, plus couple portraits. Sunrise is 6:46 AM, so this starts right on it</span>
+        <div class="srow" data-rid="ros-sat-prephotos-0" data-who="Simran|Prat|Jakobz Media">
+              <span class="rtime t-sec">6:45 AM – 7:25 AM (40 min)</span>
+              <span class="rwhat">First look with Prat, plus couple portraits. Sunrise is 6:46 AM, so this starts right on it</span>
               <span class="t-ter small">Simran, Prat, Jakobz Media</span>
-            </div><div class="srow" data-who="Simran|Prat|Jakobz Media">
-              <span class="t-sec">7:25 AM – 7:40 AM (15 min)</span>
-              <span>Private vows, Simran and Prat alone</span>
+            </div><div class="srow" data-rid="ros-sat-prephotos-1" data-who="Simran|Prat|Jakobz Media">
+              <span class="rtime t-sec">7:25 AM – 7:40 AM (15 min)</span>
+              <span class="rwhat">Private vows, Simran and Prat alone</span>
               <span class="t-ter small">Simran, Prat, Jakobz Media</span>
-            </div><div class="srow" data-who="Bride Family|Groom Family|Bridesmaids|Groomsmen">
-              <span class="t-sec">7:15 AM – 7:30 AM (15 min)</span>
-              <span>Immediate family and the wedding party gather at the bridal suite</span>
+            </div><div class="srow" data-rid="ros-sat-prephotos-2" data-who="Bride Family|Groom Family|Bridesmaids|Groomsmen">
+              <span class="rtime t-sec">7:15 AM – 7:30 AM (15 min)</span>
+              <span class="rwhat">Immediate family and the wedding party gather at the bridal suite</span>
               <span class="t-ter small">Bride Family, Groom Family, Bridesmaids, Groomsmen</span>
-            </div><div class="srow" data-who="Simran|Bride Family|Jakobz Media">
-              <span class="t-sec">7:40 AM – 8:00 AM (20 min)</span>
-              <span>First look with Papa, then Manoj uncle and Anup uncle join</span>
+            </div><div class="srow" data-rid="ros-sat-prephotos-3" data-who="Simran|Bride Family|Jakobz Media">
+              <span class="rtime t-sec">7:40 AM – 8:00 AM (20 min)</span>
+              <span class="rwhat">First look with Papa, then Manoj uncle and Anup uncle join</span>
               <span class="t-ter small">Simran, Bride Family, Jakobz Media</span>
-            </div><div class="srow" data-who="Simran|Prat|Bride Family|Groom Family|Jakobz Media">
-              <span class="t-sec">8:00 AM – 8:30 AM (30 min)</span>
-              <span>Immediate family photos, ceremony outfits</span>
+            </div><div class="srow" data-rid="ros-sat-prephotos-4" data-who="Simran|Prat|Bride Family|Groom Family|Jakobz Media">
+              <span class="rtime t-sec">8:00 AM – 8:30 AM (30 min)</span>
+              <span class="rwhat">Immediate family photos, ceremony outfits</span>
               <span class="t-ter small">Simran, Prat, Bride Family, Groom Family, Jakobz Media</span>
-            </div><div class="srow" data-who="Simran|Prat|Bridesmaids|Groomsmen|Jakobz Media">
-              <span class="t-sec">8:30 AM – 9:00 AM (30 min)</span>
-              <span>Bridal party photos, with the bridesmaids' first look folded in</span>
+            </div><div class="srow" data-rid="ros-sat-prephotos-5" data-who="Simran|Prat|Bridesmaids|Groomsmen|Jakobz Media">
+              <span class="rtime t-sec">8:30 AM – 9:00 AM (30 min)</span>
+              <span class="rwhat">Bridal party photos, with the bridesmaids' first look folded in</span>
               <span class="t-ter small">Simran, Prat, Bridesmaids, Groomsmen, Jakobz Media</span>
             </div>
       </div>
@@ -636,53 +644,53 @@ body.editing [contenteditable="true"]:focus { outline: 2px solid #059669; backgr
       <div class="track"><div class="trackbar"><div class="blk blk-event" style="left:0%;width:calc(16% - 0%)" title="Groom welcome + mandap">Groom welcome + mandap</div><div class="blk blk-event" style="left:16%;width:calc(21.6% - 16%)" title="Ganesh Puja">Ganesh Puja</div><div class="blk blk-event" style="left:21.6%;width:calc(33.6% - 21.6%)" title="Bride's arrival">Bride's arrival</div><div class="blk blk-event" style="left:33.6%;width:calc(49.6% - 33.6%)" title="Swyambar · Kanyadaan">Swyambar · Kanyadaan</div><div class="blk blk-event" style="left:49.6%;width:calc(65.60000000000001% - 49.6%)" title="Thaali + Gath Bandhan">Thaali + Gath Bandhan</div><div class="blk blk-event" style="left:65.60000000000001%;width:calc(76% - 65.60000000000001%)" title="Homa · Maalai">Homa · Maalai</div><div class="blk blk-event" style="left:76%;width:calc(92% - 76%)" title="Sath Phera">Sath Phera</div><div class="blk blk-event" style="left:92%;width:calc(100% - 92%)" title="Blessings + exit">Blessings + exit</div></div><div class="ticks"><span class="tick" style="left:0%">10 AM</span><span class="tick" style="left:12%">10:15</span><span class="tick" style="left:24%">10:30</span><span class="tick" style="left:36%">10:45</span><span class="tick" style="left:48%">11 AM</span><span class="tick" style="left:60%">11:15</span><span class="tick" style="left:72%">11:30</span><span class="tick" style="left:84%">11:45</span><span class="tick" style="left:96%">12 PM</span></div></div>
       <p class="t-ter small">Green blocks are the ceremony, start to finish. Photo and video cover all of it. Axis: 10:00 AM to 12:05 PM.</p>
       <div class="subrows">
-        <div class="srow" data-who="Prat|Bride Family|Bernardo|Bridesmaids">
-              <span class="t-sec">10:00 AM – 10:15 AM (15 min)</span>
-              <span>Welcoming of the Groom (Mapillai): Simran's dad, uncle and cousin welcome Prat at the bridge with aarti as the baraat arrives, then walk him across to the mandap. Prat takes off his shoes before stepping on. Bridesmaids go straight to the shaded waiting spot, not the audience</span>
+        <div class="srow" data-rid="ros-sat-ceremony-0" data-who="Prat|Bride Family|Bernardo|Bridesmaids">
+              <span class="rtime t-sec">10:00 AM – 10:15 AM (15 min)</span>
+              <span class="rwhat">Welcoming of the Groom (Mapillai): Simran's dad, uncle and cousin welcome Prat at the bridge with aarti as the baraat arrives, then walk him across to the mandap. Prat takes off his shoes before stepping on. Bridesmaids go straight to the shaded waiting spot, not the audience</span>
               <span class="t-ter small">Prat, Bride Family, Bernardo, Bridesmaids</span>
-            </div><div class="srow" data-who="Prat|Groom Family|Bride Family|Bernardo">
-              <span class="t-sec">10:15 AM – 10:20 AM (5 min)</span>
-              <span>Groom on the mandap: yellow string first, then the kusha grass ring. Gajen breaks the first coconut</span>
+            </div><div class="srow" data-rid="ros-sat-ceremony-1" data-who="Prat|Groom Family|Bride Family|Bernardo">
+              <span class="rtime t-sec">10:15 AM – 10:20 AM (5 min)</span>
+              <span class="rwhat">Groom on the mandap: yellow string first, then the kusha grass ring. Gajen breaks the first coconut</span>
               <span class="t-ter small">Prat, Groom Family, Bride Family, Bernardo</span>
-            </div><div class="srow" data-who="Simran|Prat|Bernardo">
-              <span class="t-sec">10:20 AM – 10:27 AM (7 min)</span>
-              <span>Ganesh Puja, with Prat, Simran's dad and the thozhan. Moved ahead of Simran's entrance on the Oct 19 timeline — Bernardo has only ever walked through the other order, so this needs confirming with him</span>
+            </div><div class="srow" data-rid="ros-sat-ceremony-2" data-who="Simran|Prat|Bernardo">
+              <span class="rtime t-sec">10:20 AM – 10:27 AM (7 min)</span>
+              <span class="rwhat">Ganesh Puja, with Prat, Simran's dad and the thozhan. Moved ahead of Simran's entrance on the Oct 19 timeline — Bernardo has only ever walked through the other order, so this needs confirming with him</span>
               <span class="t-ter small">Simran, Prat, Bernardo</span>
-            </div><div class="srow" data-who="Simran|Prat|Bride Family|Bridesmaids|Bernardo">
-              <span class="t-sec">10:27 AM – 10:42 AM (15 min)</span>
-              <span>Bride's arrival: flower girl and boy Siya and Veeran throw petals (Praveena may carry Veeran if there's no wagon), bridesmaids two at a time (sit or stand, decide at rehearsal), conch, Simran enters with Mumum, Bobbu Annie, Baba Annie and Praveena. Prat helps Simran onto the stage and Bernardo ties a yellow string on her</span>
+            </div><div class="srow" data-rid="ros-sat-ceremony-3" data-who="Simran|Prat|Bride Family|Bridesmaids|Bernardo">
+              <span class="rtime t-sec">10:27 AM – 10:42 AM (15 min)</span>
+              <span class="rwhat">Bride's arrival: flower girl and boy Siya and Veeran throw petals (Praveena may carry Veeran if there's no wagon), bridesmaids two at a time (sit or stand, decide at rehearsal), conch, Simran enters with Mumum, Bobbu Annie, Baba Annie and Praveena. Prat helps Simran onto the stage and Bernardo ties a yellow string on her</span>
               <span class="t-ter small">Simran, Prat, Bride Family, Bridesmaids, Bernardo</span>
-            </div><div class="srow" data-who="Simran|Prat|Bernardo|Bridesmaids|Groomsmen">
-              <span class="t-sec">10:42 AM – 10:55 AM (13 min)</span>
-              <span>Swyambar: Simran circles Prat three times sprinkling water with mango leaves, garland exchange with Simran garlanding Prat first, ring exchange (Shweta Dijju or Madalyn holds Simran's ring, Vig holds Prat's), then jewelry exchange</span>
+            </div><div class="srow" data-rid="ros-sat-ceremony-4" data-who="Simran|Prat|Bernardo|Bridesmaids|Groomsmen">
+              <span class="rtime t-sec">10:42 AM – 10:55 AM (13 min)</span>
+              <span class="rwhat">Swyambar: Simran circles Prat three times sprinkling water with mango leaves, garland exchange with Simran garlanding Prat first, ring exchange (Shweta Dijju or Madalyn holds Simran's ring, Vig holds Prat's), then jewelry exchange</span>
               <span class="t-ter small">Simran, Prat, Bernardo, Bridesmaids, Groomsmen</span>
-            </div><div class="srow" data-who="Simran|Prat|Bride Family|Bernardo">
-              <span class="t-sec">10:55 AM – 11:02 AM (7 min)</span>
-              <span>Kanyadaan: Simran's parents place her hands into Prat's with the conch shell, Bernardo uses the family names and gotras for the mantras. Manoj Uncle breaks a coconut</span>
+            </div><div class="srow" data-rid="ros-sat-ceremony-5" data-who="Simran|Prat|Bride Family|Bernardo">
+              <span class="rtime t-sec">10:55 AM – 11:02 AM (7 min)</span>
+              <span class="rwhat">Kanyadaan: Simran's parents place her hands into Prat's with the conch shell, Bernardo uses the family names and gotras for the mantras. Manoj Uncle breaks a coconut</span>
               <span class="t-ter small">Simran, Prat, Bride Family, Bernardo</span>
-            </div><div class="srow" data-who="Simran|Prat|Bernardo|Bride Family|Groom Family|Guests">
-              <span class="t-sec">11:02 AM – 11:22 AM (20 min)</span>
-              <span>Thaali and Gath Bandhan: Thambi Mama and Mami take the koorai sari, thaali and tilhari around for blessings, Bernardo rests the thaali on a coconut, Thambi Mama breaks a coconut over Bernardo's tray. Prat fastens the thaali clasp, puts on the tilhari, petal shower from named family, sindoor on the thaali then Simran's hair parting (Bobbu Annie fixes the bindi). Dupattas tied, who ties is decided at rehearsal</span>
+            </div><div class="srow" data-rid="ros-sat-ceremony-6" data-who="Simran|Prat|Bernardo|Bride Family|Groom Family|Guests">
+              <span class="rtime t-sec">11:02 AM – 11:22 AM (20 min)</span>
+              <span class="rwhat">Thaali and Gath Bandhan: Thambi Mama and Mami take the koorai sari, thaali and tilhari around for blessings, Bernardo rests the thaali on a coconut, Thambi Mama breaks a coconut over Bernardo's tray. Prat fastens the thaali clasp, puts on the tilhari, petal shower from named family, sindoor on the thaali then Simran's hair parting (Bobbu Annie fixes the bindi). Dupattas tied, who ties is decided at rehearsal</span>
               <span class="t-ter small">Simran, Prat, Bernardo, Bride Family, Groom Family, Guests</span>
-            </div><div class="srow" data-who="Simran|Prat|Bernardo">
-              <span class="t-sec">11:22 AM – 11:29 AM (7 min)</span>
-              <span>Homa, prayers and offerings to Shiva, Parvati, Vishnu and Lakshmi before the fire</span>
+            </div><div class="srow" data-rid="ros-sat-ceremony-7" data-who="Simran|Prat|Bernardo">
+              <span class="rtime t-sec">11:22 AM – 11:29 AM (7 min)</span>
+              <span class="rwhat">Homa, prayers and offerings to Shiva, Parvati, Vishnu and Lakshmi before the fire</span>
               <span class="t-ter small">Simran, Prat, Bernardo</span>
-            </div><div class="srow" data-who="Simran|Prat|Bernardo">
-              <span class="t-sec">11:29 AM – 11:35 AM (6 min)</span>
-              <span>Maalai Matral, garlands exchanged three times, second garlands layered on the first</span>
+            </div><div class="srow" data-rid="ros-sat-ceremony-8" data-who="Simran|Prat|Bernardo">
+              <span class="rtime t-sec">11:29 AM – 11:35 AM (6 min)</span>
+              <span class="rwhat">Maalai Matral, garlands exchanged three times, second garlands layered on the first</span>
               <span class="t-ter small">Simran, Prat, Bernardo</span>
-            </div><div class="srow" data-who="Simran|Prat|Bernardo|Bride Family|Groom Family|Bridesmaids|Groomsmen">
-              <span class="t-sec">11:35 AM – 11:55 AM (20 min)</span>
-              <span>Sath Phera: Prat leads rounds 1 to 3 with the tholan and tholi, seven steps to the stone and toe rings with the fire offering, ring game, then Simran leads rounds 4 to 7. Family and bridal party shower petals on the 7th round, then Prat lifts Simran onto the other chair</span>
+            </div><div class="srow" data-rid="ros-sat-ceremony-9" data-who="Simran|Prat|Bernardo|Bride Family|Groom Family|Bridesmaids|Groomsmen">
+              <span class="rtime t-sec">11:35 AM – 11:55 AM (20 min)</span>
+              <span class="rwhat">Sath Phera: Prat leads rounds 1 to 3 with the tholan and tholi, seven steps to the stone and toe rings with the fire offering, ring game, then Simran leads rounds 4 to 7. Family and bridal party shower petals on the 7th round, then Prat lifts Simran onto the other chair</span>
               <span class="t-ter small">Simran, Prat, Bernardo, Bride Family, Groom Family, Bridesmaids, Groomsmen</span>
-            </div><div class="srow" data-who="Simran|Prat|Bride Family|Groom Family">
-              <span class="t-sec">11:55 AM – 12:00 PM (5 min)</span>
-              <span>Ashirwad: Simran and Prat touch each other's feet, blessings from parents on stage</span>
+            </div><div class="srow" data-rid="ros-sat-ceremony-10" data-who="Simran|Prat|Bride Family|Groom Family">
+              <span class="rtime t-sec">11:55 AM – 12:00 PM (5 min)</span>
+              <span class="rwhat">Ashirwad: Simran and Prat touch each other's feet, blessings from parents on stage</span>
               <span class="t-ter small">Simran, Prat, Bride Family, Groom Family</span>
-            </div><div class="srow" data-who="Simran|Prat|Bernardo|Guests|DJ / MC">
-              <span class="t-sec">12:00 PM – 12:05 PM (5 min)</span>
-              <span>Exit: pronounced married, conch, exit song, guests throw petals</span>
+            </div><div class="srow" data-rid="ros-sat-ceremony-11" data-who="Simran|Prat|Bernardo|Guests|DJ / MC">
+              <span class="rtime t-sec">12:00 PM – 12:05 PM (5 min)</span>
+              <span class="rwhat">Exit: pronounced married, conch, exit song, guests throw petals</span>
               <span class="t-ter small">Simran, Prat, Bernardo, Guests, DJ / MC</span>
             </div>
       </div>
@@ -726,65 +734,65 @@ body.editing [contenteditable="true"]:focus { outline: 2px solid #059669; backgr
       <div class="track"><div class="trackbar"><div class="blk blk-prep" style="left:4.545454545454546%;width:calc(9.090909090909092% - 4.545454545454546%)" title="Seating">Seating</div><div class="blk blk-shoot" style="left:9.090909090909092%;width:calc(13.636363636363635% - 9.090909090909092%)" title="Entrance + first dance">Entrance + first dance</div><div class="blk blk-prep" style="left:13.636363636363635%;width:calc(30.303030303030305% - 13.636363636363635%)" title="Dinner · buffet by table release">Dinner · buffet by table release</div><div class="blk blk-shoot" style="left:30.303030303030305%;width:calc(34.84848484848485% - 30.303030303030305%)" title="Speeches">Speeches</div><div class="blk blk-shoot" style="left:34.84848484848485%;width:calc(37.878787878787875% - 34.84848484848485%)" title="Parent dances">Parent dances</div><div class="blk blk-shoot" style="left:37.878787878787875%;width:calc(45.45454545454545% - 37.878787878787875%)" title="Our speech + same-day edit">Our speech + same-day edit</div><div class="blk blk-shoot" style="left:45.45454545454545%;width:calc(46.96969696969697% - 45.45454545454545%)" title="Group photo">Group photo</div><div class="blk blk-event" style="left:46.96969696969697%;width:calc(100% - 46.96969696969697%)" title="Dance floor open · DJ">Dance floor open · DJ</div></div><div class="ticks"><span class="tick" style="left:0%">7:30</span><span class="tick" style="left:9.090909090909092%">8 PM</span><span class="tick" style="left:18.181818181818183%">8:30</span><span class="tick" style="left:27.27272727272727%">9 PM</span><span class="tick" style="left:36.36363636363637%">9:30</span><span class="tick" style="left:45.45454545454545%">10 PM</span><span class="tick" style="left:54.54545454545454%">10:30</span><span class="tick" style="left:63.63636363636363%">11 PM</span><span class="tick" style="left:72.72727272727273%">11:30</span><span class="tick" style="left:81.81818181818183%">12 AM</span><span class="tick" style="left:90.9090909090909%">12:30</span><span class="tick" style="left:100%">1 AM</span></div></div>
       <p class="t-ter small">Blue blocks are the moments photo and video must capture, green is the reception itself, gray is prep. Axis: 7:30 PM to 1:00 AM.</p>
       <div class="subrows">
-        <div class="srow" data-who="Guests|Hotel">
-              <span class="t-sec">7:00 PM – 7:45 PM (45 min)</span>
-              <span>Cocktail hour with light bites like tacos and pani puri (Simran and Prat at portraits)</span>
+        <div class="srow" data-rid="ros-sat-reception-0" data-who="Guests|Hotel">
+              <span class="rtime t-sec">7:00 PM – 7:45 PM (45 min)</span>
+              <span class="rwhat">Cocktail hour with light bites like tacos and pani puri (Simran and Prat at portraits)</span>
               <span class="t-ter small">Guests, Hotel</span>
-            </div><div class="srow" data-who="Guests|Destawed">
-              <span class="t-sec">7:45 PM – 8:00 PM (15 min)</span>
-              <span>Doors open, guests find their seats (thank-you note at each seat)</span>
+            </div><div class="srow" data-rid="ros-sat-reception-1" data-who="Guests|Destawed">
+              <span class="rtime t-sec">7:45 PM – 8:00 PM (15 min)</span>
+              <span class="rwhat">Doors open, guests find their seats (thank-you note at each seat)</span>
               <span class="t-ter small">Guests, Destawed</span>
-            </div><div class="srow" data-who="Simran|Prat|Bridesmaids|Groomsmen|DJ / MC|Jakobz Media">
-              <span class="t-sec">8:00 PM – 8:10 PM (10 min)</span>
-              <span>Grand entrances: bridal party, then Simran and Prat (songs still blank in the timeline)</span>
+            </div><div class="srow" data-rid="ros-sat-reception-2" data-who="Simran|Prat|Bridesmaids|Groomsmen|DJ / MC|Jakobz Media">
+              <span class="rtime t-sec">8:00 PM – 8:10 PM (10 min)</span>
+              <span class="rwhat">Grand entrances: bridal party, then Simran and Prat (songs still blank in the timeline)</span>
               <span class="t-ter small">Simran, Prat, Bridesmaids, Groomsmen, DJ / MC, Jakobz Media</span>
-            </div><div class="srow" data-who="Simran|Prat|DJ / MC|Jakobz Media">
-              <span class="t-sec">8:10 PM – 8:15 PM (5 min)</span>
-              <span>First dance, straight from the entrance while every guest is already watching</span>
+            </div><div class="srow" data-rid="ros-sat-reception-3" data-who="Simran|Prat|DJ / MC|Jakobz Media">
+              <span class="rtime t-sec">8:10 PM – 8:15 PM (5 min)</span>
+              <span class="rwhat">First dance, straight from the entrance while every guest is already watching</span>
               <span class="t-ter small">Simran, Prat, DJ / MC, Jakobz Media</span>
-            </div><div class="srow" data-who="DJ / MC">
-              <span class="t-sec">8:15 PM – 8:20 PM (5 min)</span>
-              <span>MC welcome, explains how the table-by-table buffet release works</span>
+            </div><div class="srow" data-rid="ros-sat-reception-4" data-who="DJ / MC">
+              <span class="rtime t-sec">8:15 PM – 8:20 PM (5 min)</span>
+              <span class="rwhat">MC welcome, explains how the table-by-table buffet release works</span>
               <span class="t-ter small">DJ / MC</span>
-            </div><div class="srow" data-who="Guests|Simran|Prat|DJ / MC|Hotel">
-              <span class="t-sec">8:20 PM – 9:10 PM (50 min)</span>
-              <span>Dinner: MC releases tables one at a time, Simran and Prat's plates brought to them. DJ plays background music</span>
+            </div><div class="srow" data-rid="ros-sat-reception-5" data-who="Guests|Simran|Prat|DJ / MC|Hotel">
+              <span class="rtime t-sec">8:20 PM – 9:10 PM (50 min)</span>
+              <span class="rwhat">Dinner: MC releases tables one at a time, Simran and Prat's plates brought to them. DJ plays background music</span>
               <span class="t-ter small">Guests, Simran, Prat, DJ / MC, Hotel</span>
-            </div><div class="srow" data-who="DJ / MC|Guests">
-              <span class="t-sec">9:10 PM – 9:15 PM (5 min)</span>
-              <span>Last table seated. MC asks guests to hold off on seconds during speeches</span>
+            </div><div class="srow" data-rid="ros-sat-reception-6" data-who="DJ / MC|Guests">
+              <span class="rtime t-sec">9:10 PM – 9:15 PM (5 min)</span>
+              <span class="rwhat">Last table seated. MC asks guests to hold off on seconds during speeches</span>
               <span class="t-ter small">DJ / MC, Guests</span>
-            </div><div class="srow" data-who="Bridesmaids|Jakobz Media">
-              <span class="t-sec">9:15 PM – 9:20 PM (5 min)</span>
-              <span>Maid of honor speech</span>
+            </div><div class="srow" data-rid="ros-sat-reception-7" data-who="Bridesmaids|Jakobz Media">
+              <span class="rtime t-sec">9:15 PM – 9:20 PM (5 min)</span>
+              <span class="rwhat">Maid of honor speech</span>
               <span class="t-ter small">Bridesmaids, Jakobz Media</span>
-            </div><div class="srow" data-who="Groomsmen|Jakobz Media">
-              <span class="t-sec">9:20 PM – 9:25 PM (5 min)</span>
-              <span>Best man speech</span>
+            </div><div class="srow" data-rid="ros-sat-reception-8" data-who="Groomsmen|Jakobz Media">
+              <span class="rtime t-sec">9:20 PM – 9:25 PM (5 min)</span>
+              <span class="rwhat">Best man speech</span>
               <span class="t-ter small">Groomsmen, Jakobz Media</span>
-            </div><div class="srow" data-who="Simran|Bride Family|DJ / MC|Jakobz Media">
-              <span class="t-sec">9:25 PM – 9:30 PM (5 min)</span>
-              <span>Father-daughter dance</span>
+            </div><div class="srow" data-rid="ros-sat-reception-9" data-who="Simran|Bride Family|DJ / MC|Jakobz Media">
+              <span class="rtime t-sec">9:25 PM – 9:30 PM (5 min)</span>
+              <span class="rwhat">Father-daughter dance</span>
               <span class="t-ter small">Simran, Bride Family, DJ / MC, Jakobz Media</span>
-            </div><div class="srow" data-who="Prat|Groom Family|DJ / MC|Jakobz Media">
-              <span class="t-sec">9:30 PM – 9:35 PM (5 min)</span>
-              <span>Mother-son dance</span>
+            </div><div class="srow" data-rid="ros-sat-reception-10" data-who="Prat|Groom Family|DJ / MC|Jakobz Media">
+              <span class="rtime t-sec">9:30 PM – 9:35 PM (5 min)</span>
+              <span class="rwhat">Mother-son dance</span>
               <span class="t-ter small">Prat, Groom Family, DJ / MC, Jakobz Media</span>
-            </div><div class="srow" data-who="Simran|Prat|Hotel|Jakobz Media">
-              <span class="t-sec">9:35 PM – 9:45 PM (10 min)</span>
-              <span>Simran and Prat's speech, ending with a champagne pop and toast (servers pour guest glasses during the parent dances)</span>
+            </div><div class="srow" data-rid="ros-sat-reception-11" data-who="Simran|Prat|Hotel|Jakobz Media">
+              <span class="rtime t-sec">9:35 PM – 9:45 PM (10 min)</span>
+              <span class="rwhat">Simran and Prat's speech, ending with a champagne pop and toast (servers pour guest glasses during the parent dances)</span>
               <span class="t-ter small">Simran, Prat, Hotel, Jakobz Media</span>
-            </div><div class="srow" data-who="Jakobz Media|AV">
-              <span class="t-sec">9:45 PM – 10:00 PM (15 min)</span>
-              <span>Same-day edit video screening</span>
+            </div><div class="srow" data-rid="ros-sat-reception-12" data-who="Jakobz Media|AV">
+              <span class="rtime t-sec">9:45 PM – 10:00 PM (15 min)</span>
+              <span class="rwhat">Same-day edit video screening</span>
               <span class="t-ter small">Jakobz Media, AV</span>
-            </div><div class="srow" data-who="Guests|Jakobz Media">
-              <span class="t-sec">10:00 PM – 10:05 PM (5 min)</span>
-              <span>Group photo with all guests</span>
+            </div><div class="srow" data-rid="ros-sat-reception-13" data-who="Guests|Jakobz Media">
+              <span class="rtime t-sec">10:00 PM – 10:05 PM (5 min)</span>
+              <span class="rwhat">Group photo with all guests</span>
               <span class="t-ter small">Guests, Jakobz Media</span>
-            </div><div class="srow" data-who="DJ / MC|Guests">
-              <span class="t-sec">10:05 PM – 1:00 AM (2 hr 55)</span>
-              <span>Dance floor open with the DJ, photo booth running. Event ends at 1:00 AM, after party location TBD</span>
+            </div><div class="srow" data-rid="ros-sat-reception-14" data-who="DJ / MC|Guests">
+              <span class="rtime t-sec">10:05 PM – 1:00 AM (2 hr 55)</span>
+              <span class="rwhat">Dance floor open with the DJ, photo booth running. Event ends at 1:00 AM, after party location TBD</span>
               <span class="t-ter small">DJ / MC, Guests</span>
             </div>
       </div>
@@ -830,10 +838,10 @@ body.editing [contenteditable="true"]:focus { outline: 2px solid #059669; backgr
         <div class="wknum">24</div>
         <div class="t-sec small">Ceremony + Reception</div>
       </div></div>
-      <div class="wktbdrow"><div class="wktbdlabel">Time TBD</div><div class="wktbd"></div><div class="wktbd"><div class="wkchip" data-who="Guests" title="Guests arrive on the LOMAS Travels shuttle · TBD (during the day)">Guests arrive on the LOMAS Travels shuttle</div><div class="wkchip" data-who="Simran|Prat|Bride Family|Groom Family|Destawed" title="Sort luggage and Destawed wedding items, steam outfits, tour and itinerary run-through with immediate family · TBD (not timed)">Sort luggage and Destawed wedding items, steam outfits, tour and itinerary run-through with immediate family</div></div><div class="wktbd"></div><div class="wktbd"></div><div class="wktbd"></div></div>
+      <div class="wktbdrow"><div class="wktbdlabel">Time TBD</div><div class="wktbd"></div><div class="wktbd"><div class="wkchip" data-rid="wed-4" data-who="Guests" title="Guests arrive on the LOMAS Travels shuttle · TBD (during the day)"><span class="rwhat">Guests arrive on the LOMAS Travels shuttle</span></div><div class="wkchip" data-rid="wed-5" data-who="Simran|Prat|Bride Family|Groom Family|Destawed" title="Sort luggage and Destawed wedding items, steam outfits, tour and itinerary run-through with immediate family · TBD (not timed)"><span class="rwhat">Sort luggage and Destawed wedding items, steam outfits, tour and itinerary run-through with immediate family</span></div></div><div class="wktbd"></div><div class="wktbd"></div><div class="wktbd"></div></div>
       <div class="wkbody" style="height:828px">
         <div class="wkgutter"><span class="wkhour" style="top:-6px"></span><span class="wkhour" style="top:30px">3 AM</span><span class="wkhour" style="top:66px">4 AM</span><span class="wkhour" style="top:102px">5 AM</span><span class="wkhour" style="top:138px">6 AM</span><span class="wkhour" style="top:174px">7 AM</span><span class="wkhour" style="top:210px">8 AM</span><span class="wkhour" style="top:246px">9 AM</span><span class="wkhour" style="top:282px">10 AM</span><span class="wkhour" style="top:318px">11 AM</span><span class="wkhour" style="top:354px">12 PM</span><span class="wkhour" style="top:390px">1 PM</span><span class="wkhour" style="top:426px">2 PM</span><span class="wkhour" style="top:462px">3 PM</span><span class="wkhour" style="top:498px">4 PM</span><span class="wkhour" style="top:534px">5 PM</span><span class="wkhour" style="top:570px">6 PM</span><span class="wkhour" style="top:606px">7 PM</span><span class="wkhour" style="top:642px">8 PM</span><span class="wkhour" style="top:678px">9 PM</span><span class="wkhour" style="top:714px">10 PM</span><span class="wkhour" style="top:750px">11 PM</span><span class="wkhour" style="top:786px">12 AM</span></div>
-        <div class="wkcol" data-day="tue"><div class="hline" style="top:0px"></div><div class="hline" style="top:36px"></div><div class="hline" style="top:72px"></div><div class="hline" style="top:108px"></div><div class="hline" style="top:144px"></div><div class="hline" style="top:180px"></div><div class="hline" style="top:216px"></div><div class="hline" style="top:252px"></div><div class="hline" style="top:288px"></div><div class="hline" style="top:324px"></div><div class="hline" style="top:360px"></div><div class="hline" style="top:396px"></div><div class="hline" style="top:432px"></div><div class="hline" style="top:468px"></div><div class="hline" style="top:504px"></div><div class="hline" style="top:540px"></div><div class="hline" style="top:576px"></div><div class="hline" style="top:612px"></div><div class="hline" style="top:648px"></div><div class="hline" style="top:684px"></div><div class="hline" style="top:720px"></div><div class="hline" style="top:756px"></div><div class="hline" style="top:792px"></div><div class="wksun" style="top:171px"><span title="Sunrise 6:45 AM"><svg class="sunicon" viewBox="0 0 16 16" fill="none" aria-hidden="true"><g stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"><path d="M4.5 13.5a3.5 3.5 0 0 1 7 0"/><path d="M1.5 13.5h13"/><path d="M8 2.8v4.4"/><path d="M6.1 4.7 8 2.8l1.9 1.9"/></g></svg></span></div><div class="wksun" style="top:588.6px"><span title="Sunset 6:21 PM"><svg class="sunicon" viewBox="0 0 16 16" fill="none" aria-hidden="true"><g stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"><path d="M4.5 13.5a3.5 3.5 0 0 1 7 0"/><path d="M1.5 13.5h13"/><path d="M8 2.8v4.4"/><path d="M6.1 5.3 8 7.2l1.9-1.9"/></g></svg></span></div><div class="wkblk wk-prep" data-who="Simran|Prat|Bride Family|Groom Family" data-detail="Tue, Oct 20
+        <div class="wkcol" data-day="tue"><div class="hline" style="top:0px"></div><div class="hline" style="top:36px"></div><div class="hline" style="top:72px"></div><div class="hline" style="top:108px"></div><div class="hline" style="top:144px"></div><div class="hline" style="top:180px"></div><div class="hline" style="top:216px"></div><div class="hline" style="top:252px"></div><div class="hline" style="top:288px"></div><div class="hline" style="top:324px"></div><div class="hline" style="top:360px"></div><div class="hline" style="top:396px"></div><div class="hline" style="top:432px"></div><div class="hline" style="top:468px"></div><div class="hline" style="top:504px"></div><div class="hline" style="top:540px"></div><div class="hline" style="top:576px"></div><div class="hline" style="top:612px"></div><div class="hline" style="top:648px"></div><div class="hline" style="top:684px"></div><div class="hline" style="top:720px"></div><div class="hline" style="top:756px"></div><div class="hline" style="top:792px"></div><div class="wksun" style="top:171px"><span title="Sunrise 6:45 AM"><svg class="sunicon" viewBox="0 0 16 16" fill="none" aria-hidden="true"><g stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"><path d="M4.5 13.5a3.5 3.5 0 0 1 7 0"/><path d="M1.5 13.5h13"/><path d="M8 2.8v4.4"/><path d="M6.1 4.7 8 2.8l1.9 1.9"/></g></svg></span></div><div class="wksun" style="top:588.6px"><span title="Sunset 6:21 PM"><svg class="sunicon" viewBox="0 0 16 16" fill="none" aria-hidden="true"><g stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"><path d="M4.5 13.5a3.5 3.5 0 0 1 7 0"/><path d="M1.5 13.5h13"/><path d="M8 2.8v4.4"/><path d="M6.1 5.3 8 7.2l1.9-1.9"/></g></svg></span></div><div class="wkblk wk-prep" data-rid="tue-0" data-who="Simran|Prat|Bride Family|Groom Family" data-detail="Tue, Oct 20
 Simran, Prat and immediate family arrive and settle in
 12:00 PM – 3:00 PM (3 hr)
 Simran, Prat, Bride Family, Groom Family
@@ -842,7 +850,7 @@ Prep or logistics · In timeline"
             title="Simran, Prat and immediate family arrive and settle in · 12:00 PM – 3:00 PM">
             <div class="wkname">Simran, Prat and immediate family arrive and settle in</div>
             <div class="wkrange">12:00 PM – 3:00 PM</div>
-          </div><div class="wkblk wk-prep" data-who="Simran|Prat|Bride Family|Groom Family|Hotel" data-detail="Tue, Oct 20
+          </div><div class="wkblk wk-prep" data-rid="tue-1" data-who="Simran|Prat|Bride Family|Groom Family|Hotel" data-detail="Tue, Oct 20
 Room check-in
 3:00 PM – 4:00 PM (1 hr)
 Simran, Prat, Bride Family, Groom Family, Hotel
@@ -851,7 +859,7 @@ Prep or logistics · In timeline"
             title="Room check-in · 3:00 PM – 4:00 PM">
             <div class="wkname">Room check-in</div>
             <div class="wkrange">3:00 PM – 4:00 PM</div>
-          </div><div class="wkblk wk-shoot" data-who="Simran" data-detail="Tue, Oct 20
+          </div><div class="wkblk wk-shoot" data-rid="tue-2" data-who="Simran" data-detail="Tue, Oct 20
 Simran does her own makeup and hair for the e-shoot
 4:15 PM – 5:15 PM (1 hr)
 Simran
@@ -860,7 +868,7 @@ Photo and video · New"
             title="Simran does her own makeup and hair for the e-shoot · 4:15 PM – 5:15 PM">
             <div class="wkname">Simran does her own makeup and hair for the e-shoot</div>
             <div class="wkrange">4:15 PM – 5:15 PM</div>
-          </div><div class="wkblk wk-shoot" data-who="Jakobz Media" data-detail="Tue, Oct 20
+          </div><div class="wkblk wk-shoot" data-rid="tue-3" data-who="Jakobz Media" data-detail="Tue, Oct 20
 Photo and video team arrives and sets up (on property since Oct 19)
 5:00 PM – 5:15 PM (15 min)
 Jakobz Media
@@ -869,7 +877,7 @@ Photo and video · New"
             title="Photo and video team arrives and sets up (on property since Oct 19) · 5:00 PM – 5:15 PM">
             <div class="wkname">Photo and video team arrives and sets up (on property since Oct 19)</div>
             
-          </div><div class="wkblk wk-shoot" data-who="Simran|Prat|Jakobz Media" data-detail="Tue, Oct 20
+          </div><div class="wkblk wk-shoot" data-rid="tue-4" data-who="Simran|Prat|Jakobz Media" data-detail="Tue, Oct 20
 Sunset e-shoot, outfit 2. Sunset is 6:21 PM, so golden hour runs roughly 5:45 to 6:21
 5:15 PM – 6:30 PM (1 hr 15)
 Simran, Prat, Jakobz Media
@@ -878,7 +886,7 @@ Photo and video · New"
             title="Sunset e-shoot, outfit 2. Sunset is 6:21 PM, so golden hour runs roughly 5:45 to 6:21 · 5:15 PM – 6:30 PM">
             <div class="wkname">Sunset e-shoot, outfit 2. Sunset is 6:21 PM, so golden hour runs roughly 5:45 to 6:21</div>
             <div class="wkrange">5:15 PM – 6:30 PM</div>
-          </div></div><div class="wkcol" data-day="wed"><div class="hline" style="top:0px"></div><div class="hline" style="top:36px"></div><div class="hline" style="top:72px"></div><div class="hline" style="top:108px"></div><div class="hline" style="top:144px"></div><div class="hline" style="top:180px"></div><div class="hline" style="top:216px"></div><div class="hline" style="top:252px"></div><div class="hline" style="top:288px"></div><div class="hline" style="top:324px"></div><div class="hline" style="top:360px"></div><div class="hline" style="top:396px"></div><div class="hline" style="top:432px"></div><div class="hline" style="top:468px"></div><div class="hline" style="top:504px"></div><div class="hline" style="top:540px"></div><div class="hline" style="top:576px"></div><div class="hline" style="top:612px"></div><div class="hline" style="top:648px"></div><div class="hline" style="top:684px"></div><div class="hline" style="top:720px"></div><div class="hline" style="top:756px"></div><div class="hline" style="top:792px"></div><div class="wksun" style="top:171px"><span title="Sunrise 6:45 AM"><svg class="sunicon" viewBox="0 0 16 16" fill="none" aria-hidden="true"><g stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"><path d="M4.5 13.5a3.5 3.5 0 0 1 7 0"/><path d="M1.5 13.5h13"/><path d="M8 2.8v4.4"/><path d="M6.1 4.7 8 2.8l1.9 1.9"/></g></svg></span></div><div class="wksun" style="top:588px"><span title="Sunset 6:20 PM"><svg class="sunicon" viewBox="0 0 16 16" fill="none" aria-hidden="true"><g stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"><path d="M4.5 13.5a3.5 3.5 0 0 1 7 0"/><path d="M1.5 13.5h13"/><path d="M8 2.8v4.4"/><path d="M6.1 5.3 8 7.2l1.9-1.9"/></g></svg></span></div><div class="wkblk wk-shoot" data-who="Simran" data-detail="Wed, Oct 21
+          </div></div><div class="wkcol" data-day="wed"><div class="hline" style="top:0px"></div><div class="hline" style="top:36px"></div><div class="hline" style="top:72px"></div><div class="hline" style="top:108px"></div><div class="hline" style="top:144px"></div><div class="hline" style="top:180px"></div><div class="hline" style="top:216px"></div><div class="hline" style="top:252px"></div><div class="hline" style="top:288px"></div><div class="hline" style="top:324px"></div><div class="hline" style="top:360px"></div><div class="hline" style="top:396px"></div><div class="hline" style="top:432px"></div><div class="hline" style="top:468px"></div><div class="hline" style="top:504px"></div><div class="hline" style="top:540px"></div><div class="hline" style="top:576px"></div><div class="hline" style="top:612px"></div><div class="hline" style="top:648px"></div><div class="hline" style="top:684px"></div><div class="hline" style="top:720px"></div><div class="hline" style="top:756px"></div><div class="hline" style="top:792px"></div><div class="wksun" style="top:171px"><span title="Sunrise 6:45 AM"><svg class="sunicon" viewBox="0 0 16 16" fill="none" aria-hidden="true"><g stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"><path d="M4.5 13.5a3.5 3.5 0 0 1 7 0"/><path d="M1.5 13.5h13"/><path d="M8 2.8v4.4"/><path d="M6.1 4.7 8 2.8l1.9 1.9"/></g></svg></span></div><div class="wksun" style="top:588px"><span title="Sunset 6:20 PM"><svg class="sunicon" viewBox="0 0 16 16" fill="none" aria-hidden="true"><g stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"><path d="M4.5 13.5a3.5 3.5 0 0 1 7 0"/><path d="M1.5 13.5h13"/><path d="M8 2.8v4.4"/><path d="M6.1 5.3 8 7.2l1.9-1.9"/></g></svg></span></div><div class="wkblk wk-shoot" data-rid="wed-0" data-who="Simran" data-detail="Wed, Oct 21
 Simran does her own makeup and hair for the e-shoot
 5:00 AM – 6:00 AM (1 hr)
 Simran
@@ -887,7 +895,7 @@ Photo and video · New"
             title="Simran does her own makeup and hair for the e-shoot · 5:00 AM – 6:00 AM">
             <div class="wkname">Simran does her own makeup and hair for the e-shoot</div>
             <div class="wkrange">5:00 AM – 6:00 AM</div>
-          </div><div class="wkblk wk-shoot" data-who="Jakobz Media" data-detail="Wed, Oct 21
+          </div><div class="wkblk wk-shoot" data-rid="wed-1" data-who="Jakobz Media" data-detail="Wed, Oct 21
 Photo and video team arrives and sets up
 5:45 AM – 6:00 AM (15 min)
 Jakobz Media
@@ -896,7 +904,7 @@ Photo and video · New"
             title="Photo and video team arrives and sets up · 5:45 AM – 6:00 AM">
             <div class="wkname">Photo and video team arrives and sets up</div>
             
-          </div><div class="wkblk wk-shoot" data-who="Simran|Prat|Jakobz Media" data-detail="Wed, Oct 21
+          </div><div class="wkblk wk-shoot" data-rid="wed-2" data-who="Simran|Prat|Jakobz Media" data-detail="Wed, Oct 21
 Sunrise e-shoot, outfit 1. Sunrise is 6:45 AM, so the first 45 minutes are before the sun is up — confirm with Jakobz whether they want that for blue hour or would rather start around 6:25
 6:00 AM – 7:15 AM (1 hr 15)
 Simran, Prat, Jakobz Media
@@ -905,7 +913,7 @@ Photo and video · New"
             title="Sunrise e-shoot, outfit 1. Sunrise is 6:45 AM, so the first 45 minutes are before the sun is up — confirm with Jakobz whether they want that for blue hour or would rather start around 6:25 · 6:00 AM – 7:15 AM">
             <div class="wkname">Sunrise e-shoot, outfit 1. Sunrise is 6:45 AM, so the first 45 minutes are before the sun is up — confirm with Jakobz whether they want that for blue hour or would rather start around 6:25</div>
             <div class="wkrange">6:00 AM – 7:15 AM</div>
-          </div><div class="wkblk wk-prep option" data-who="Simran|Prat|Bride Family" data-detail="Wed, Oct 21
+          </div><div class="wkblk wk-prep option" data-rid="wed-3" data-who="Simran|Prat|Bride Family" data-detail="Wed, Oct 21
 Dashain tika (estimated time)
 11:00 AM – 1:00 PM (2 hr)
 Simran, Prat, Bride Family
@@ -914,7 +922,7 @@ Prep or logistics · option, not yet picked · New"
             title="Dashain tika (estimated time) · 11:00 AM – 1:00 PM">
             <div class="wkname">Dashain tika (estimated time)</div>
             <div class="wkrange">11:00 AM – 1:00 PM</div>
-          </div><div class="wkblk wk-prep" data-who="Guests|Hotel" data-detail="Wed, Oct 21
+          </div><div class="wkblk wk-prep" data-rid="wed-6" data-who="Guests|Hotel" data-detail="Wed, Oct 21
 Room check-in
 3:00 PM – 4:00 PM (1 hr)
 Guests, Hotel
@@ -923,7 +931,7 @@ Prep or logistics · In timeline"
             title="Room check-in · 3:00 PM – 4:00 PM">
             <div class="wkname">Room check-in</div>
             <div class="wkrange">3:00 PM – 4:00 PM</div>
-          </div><div class="wkblk wk-prep option" data-who="Simran|Prat|Destawed|Hotel" data-detail="Wed, Oct 21
+          </div><div class="wkblk wk-prep option" data-rid="wed-7" data-who="Simran|Prat|Destawed|Hotel" data-detail="Wed, Oct 21
 Destawed pre-con meeting (end time not listed, 1 hr assumed)
 4:00 PM – 5:00 PM (1 hr)
 Simran, Prat, Destawed, Hotel
@@ -932,7 +940,7 @@ Prep or logistics · option, not yet picked · In timeline"
             title="Destawed pre-con meeting (end time not listed, 1 hr assumed) · 4:00 PM – 5:00 PM">
             <div class="wkname">Destawed pre-con meeting (end time not listed, 1 hr assumed)</div>
             <div class="wkrange">4:00 PM – 5:00 PM</div>
-          </div></div><div class="wkcol" data-day="thu"><div class="hline" style="top:0px"></div><div class="hline" style="top:36px"></div><div class="hline" style="top:72px"></div><div class="hline" style="top:108px"></div><div class="hline" style="top:144px"></div><div class="hline" style="top:180px"></div><div class="hline" style="top:216px"></div><div class="hline" style="top:252px"></div><div class="hline" style="top:288px"></div><div class="hline" style="top:324px"></div><div class="hline" style="top:360px"></div><div class="hline" style="top:396px"></div><div class="hline" style="top:432px"></div><div class="hline" style="top:468px"></div><div class="hline" style="top:504px"></div><div class="hline" style="top:540px"></div><div class="hline" style="top:576px"></div><div class="hline" style="top:612px"></div><div class="hline" style="top:648px"></div><div class="hline" style="top:684px"></div><div class="hline" style="top:720px"></div><div class="hline" style="top:756px"></div><div class="hline" style="top:792px"></div><div class="wksun" style="top:171px"><span title="Sunrise 6:45 AM"><svg class="sunicon" viewBox="0 0 16 16" fill="none" aria-hidden="true"><g stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"><path d="M4.5 13.5a3.5 3.5 0 0 1 7 0"/><path d="M1.5 13.5h13"/><path d="M8 2.8v4.4"/><path d="M6.1 4.7 8 2.8l1.9 1.9"/></g></svg></span></div><div class="wksun" style="top:587.4px"><span title="Sunset 6:19 PM"><svg class="sunicon" viewBox="0 0 16 16" fill="none" aria-hidden="true"><g stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"><path d="M4.5 13.5a3.5 3.5 0 0 1 7 0"/><path d="M1.5 13.5h13"/><path d="M8 2.8v4.4"/><path d="M6.1 5.3 8 7.2l1.9-1.9"/></g></svg></span></div><div class="wkblk wk-prep" data-who="Simran|Mehndi artist|Guests" data-detail="Thu, Oct 22
+          </div></div><div class="wkcol" data-day="thu"><div class="hline" style="top:0px"></div><div class="hline" style="top:36px"></div><div class="hline" style="top:72px"></div><div class="hline" style="top:108px"></div><div class="hline" style="top:144px"></div><div class="hline" style="top:180px"></div><div class="hline" style="top:216px"></div><div class="hline" style="top:252px"></div><div class="hline" style="top:288px"></div><div class="hline" style="top:324px"></div><div class="hline" style="top:360px"></div><div class="hline" style="top:396px"></div><div class="hline" style="top:432px"></div><div class="hline" style="top:468px"></div><div class="hline" style="top:504px"></div><div class="hline" style="top:540px"></div><div class="hline" style="top:576px"></div><div class="hline" style="top:612px"></div><div class="hline" style="top:648px"></div><div class="hline" style="top:684px"></div><div class="hline" style="top:720px"></div><div class="hline" style="top:756px"></div><div class="hline" style="top:792px"></div><div class="wksun" style="top:171px"><span title="Sunrise 6:45 AM"><svg class="sunicon" viewBox="0 0 16 16" fill="none" aria-hidden="true"><g stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"><path d="M4.5 13.5a3.5 3.5 0 0 1 7 0"/><path d="M1.5 13.5h13"/><path d="M8 2.8v4.4"/><path d="M6.1 4.7 8 2.8l1.9 1.9"/></g></svg></span></div><div class="wksun" style="top:587.4px"><span title="Sunset 6:19 PM"><svg class="sunicon" viewBox="0 0 16 16" fill="none" aria-hidden="true"><g stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"><path d="M4.5 13.5a3.5 3.5 0 0 1 7 0"/><path d="M1.5 13.5h13"/><path d="M8 2.8v4.4"/><path d="M6.1 5.3 8 7.2l1.9-1.9"/></g></svg></span></div><div class="wkblk wk-prep" data-rid="thu-0" data-who="Simran|Mehndi artist|Guests" data-detail="Thu, Oct 22
 Bridal mehndi on a couch in the main resort area, guests drop by
 8:00 AM – 12:00 PM (4 hr)
 Simran, Mehndi artist, Guests
@@ -941,7 +949,7 @@ Prep or logistics · New"
             title="Bridal mehndi on a couch in the main resort area, guests drop by · 8:00 AM – 12:00 PM">
             <div class="wkname">Bridal mehndi on a couch in the main resort area, guests drop by</div>
             <div class="wkrange">8:00 AM – 12:00 PM</div>
-          </div><div class="wkblk wk-shoot" data-who="Jakobz Media" data-detail="Thu, Oct 22
+          </div><div class="wkblk wk-shoot" data-rid="thu-1" data-who="Jakobz Media" data-detail="Thu, Oct 22
 Photo and video team arrives and sets up
 10:15 AM – 10:30 AM (15 min)
 Jakobz Media
@@ -950,7 +958,7 @@ Photo and video · Proposed"
             title="Photo and video team arrives and sets up · 10:15 AM – 10:30 AM">
             <div class="wkname">Photo and video team arrives and sets up</div>
             
-          </div><div class="wkblk wk-shoot" data-who="Simran|Mehndi artist|Jakobz Media" data-detail="Thu, Oct 22
+          </div><div class="wkblk wk-shoot" data-rid="thu-2" data-who="Simran|Mehndi artist|Jakobz Media" data-detail="Thu, Oct 22
 Photo and video capture mehndi content, once the design is filled in and guests are stopping by
 10:30 AM – 12:00 PM (1 hr 30)
 Simran, Mehndi artist, Jakobz Media
@@ -959,7 +967,7 @@ Photo and video · Proposed"
             title="Photo and video capture mehndi content, once the design is filled in and guests are stopping by · 10:30 AM – 12:00 PM">
             <div class="wkname">Photo and video capture mehndi content, once the design is filled in and guests are stopping by</div>
             <div class="wkrange">10:30 AM – 12:00 PM</div>
-          </div><div class="wkblk wk-prep" data-who="Simran" data-detail="Thu, Oct 22
+          </div><div class="wkblk wk-prep" data-rid="thu-3" data-who="Simran" data-detail="Thu, Oct 22
 Mehndi dries, lunch and rest
 12:00 PM – 1:30 PM (1 hr 30)
 Simran
@@ -968,7 +976,7 @@ Prep or logistics · Proposed"
             title="Mehndi dries, lunch and rest · 12:00 PM – 1:30 PM">
             <div class="wkname">Mehndi dries, lunch and rest</div>
             <div class="wkrange">12:00 PM – 1:30 PM</div>
-          </div><div class="wkblk wk-prep" data-who="Simran|MUAH" data-detail="Thu, Oct 22
+          </div><div class="wkblk wk-prep" data-rid="thu-4" data-who="Simran|MUAH" data-detail="Thu, Oct 22
 Simran's hair and makeup in her room, ready at 6:00 PM (2 hr, per Claudio's itinerary of Sep 29)
 4:00 PM – 6:00 PM (2 hr)
 Simran, MUAH
@@ -977,7 +985,7 @@ Prep or logistics · New"
             title="Simran's hair and makeup in her room, ready at 6:00 PM (2 hr, per Claudio's itinerary of Sep 29) · 4:00 PM – 6:00 PM">
             <div class="wkname">Simran's hair and makeup in her room, ready at 6:00 PM (2 hr, per Claudio's itinerary of Sep 29)</div>
             <div class="wkrange">4:00 PM – 6:00 PM</div>
-          </div><div class="wkblk wk-shoot" data-who="Jakobz Media" data-detail="Thu, Oct 22
+          </div><div class="wkblk wk-shoot" data-rid="thu-5" data-who="Jakobz Media" data-detail="Thu, Oct 22
 Photo and video team arrives and sets up
 6:00 PM – 6:30 PM (30 min)
 Jakobz Media
@@ -986,7 +994,7 @@ Photo and video · Proposed"
             title="Photo and video team arrives and sets up · 6:00 PM – 6:30 PM">
             <div class="wkname">Photo and video team arrives and sets up</div>
             
-          </div><div class="wkblk wk-shoot" data-who="Simran|Prat|Jakobz Media" data-detail="Thu, Oct 22
+          </div><div class="wkblk wk-shoot" data-rid="thu-6" data-who="Simran|Prat|Jakobz Media" data-detail="Thu, Oct 22
 Couple shoot, straight into the party
 6:30 PM – 7:00 PM (30 min)
 Simran, Prat, Jakobz Media
@@ -995,7 +1003,7 @@ Photo and video · Proposed"
             title="Couple shoot, straight into the party · 6:30 PM – 7:00 PM">
             <div class="wkname">Couple shoot, straight into the party</div>
             
-          </div><div class="wkblk wk-event" data-who="Simran|Prat|Guests|DJ / MC|Jakobz Media" data-detail="Thu, Oct 22
+          </div><div class="wkblk wk-event" data-rid="thu-7" data-who="Simran|Prat|Guests|DJ / MC|Jakobz Media" data-detail="Thu, Oct 22
 Welcome Party
 7:00 PM – 11:00 PM (4 hr)
 Simran, Prat, Guests, DJ / MC, Jakobz Media
@@ -1004,7 +1012,7 @@ Event · In timeline"
             title="Welcome Party · 7:00 PM – 11:00 PM">
             <div class="wkname">Welcome Party</div>
             <div class="wkrange">7:00 PM – 11:00 PM</div>
-          </div><div class="wkblk wk-shoot" data-who="Simran|Prat|Bride Family|Groom Family|Jakobz Media" data-detail="Thu, Oct 22
+          </div><div class="wkblk wk-shoot" data-rid="thu-8" data-who="Simran|Prat|Bride Family|Groom Family|Jakobz Media" data-detail="Thu, Oct 22
 Immediate family photos during the party, before the 8:00 PM program
 7:00 PM – 7:30 PM (30 min)
 Simran, Prat, Bride Family, Groom Family, Jakobz Media
@@ -1013,7 +1021,7 @@ Photo and video · New"
             title="Immediate family photos during the party, before the 8:00 PM program · 7:00 PM – 7:30 PM">
             <div class="wkname">Immediate family photos during the party, before the 8:00 PM program</div>
             
-          </div></div><div class="wkcol" data-day="fri"><div class="hline" style="top:0px"></div><div class="hline" style="top:36px"></div><div class="hline" style="top:72px"></div><div class="hline" style="top:108px"></div><div class="hline" style="top:144px"></div><div class="hline" style="top:180px"></div><div class="hline" style="top:216px"></div><div class="hline" style="top:252px"></div><div class="hline" style="top:288px"></div><div class="hline" style="top:324px"></div><div class="hline" style="top:360px"></div><div class="hline" style="top:396px"></div><div class="hline" style="top:432px"></div><div class="hline" style="top:468px"></div><div class="hline" style="top:504px"></div><div class="hline" style="top:540px"></div><div class="hline" style="top:576px"></div><div class="hline" style="top:612px"></div><div class="hline" style="top:648px"></div><div class="hline" style="top:684px"></div><div class="hline" style="top:720px"></div><div class="hline" style="top:756px"></div><div class="hline" style="top:792px"></div><div class="wksun" style="top:171.6px"><span title="Sunrise 6:46 AM"><svg class="sunicon" viewBox="0 0 16 16" fill="none" aria-hidden="true"><g stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"><path d="M4.5 13.5a3.5 3.5 0 0 1 7 0"/><path d="M1.5 13.5h13"/><path d="M8 2.8v4.4"/><path d="M6.1 4.7 8 2.8l1.9 1.9"/></g></svg></span></div><div class="wksun" style="top:587.4px"><span title="Sunset 6:19 PM"><svg class="sunicon" viewBox="0 0 16 16" fill="none" aria-hidden="true"><g stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"><path d="M4.5 13.5a3.5 3.5 0 0 1 7 0"/><path d="M1.5 13.5h13"/><path d="M8 2.8v4.4"/><path d="M6.1 5.3 8 7.2l1.9-1.9"/></g></svg></span></div><div class="wkblk wk-prep" data-who="Prat|Groom Family" data-detail="Fri, Oct 23
+          </div></div><div class="wkcol" data-day="fri"><div class="hline" style="top:0px"></div><div class="hline" style="top:36px"></div><div class="hline" style="top:72px"></div><div class="hline" style="top:108px"></div><div class="hline" style="top:144px"></div><div class="hline" style="top:180px"></div><div class="hline" style="top:216px"></div><div class="hline" style="top:252px"></div><div class="hline" style="top:288px"></div><div class="hline" style="top:324px"></div><div class="hline" style="top:360px"></div><div class="hline" style="top:396px"></div><div class="hline" style="top:432px"></div><div class="hline" style="top:468px"></div><div class="hline" style="top:504px"></div><div class="hline" style="top:540px"></div><div class="hline" style="top:576px"></div><div class="hline" style="top:612px"></div><div class="hline" style="top:648px"></div><div class="hline" style="top:684px"></div><div class="hline" style="top:720px"></div><div class="hline" style="top:756px"></div><div class="hline" style="top:792px"></div><div class="wksun" style="top:171.6px"><span title="Sunrise 6:46 AM"><svg class="sunicon" viewBox="0 0 16 16" fill="none" aria-hidden="true"><g stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"><path d="M4.5 13.5a3.5 3.5 0 0 1 7 0"/><path d="M1.5 13.5h13"/><path d="M8 2.8v4.4"/><path d="M6.1 4.7 8 2.8l1.9 1.9"/></g></svg></span></div><div class="wksun" style="top:587.4px"><span title="Sunset 6:19 PM"><svg class="sunicon" viewBox="0 0 16 16" fill="none" aria-hidden="true"><g stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"><path d="M4.5 13.5a3.5 3.5 0 0 1 7 0"/><path d="M1.5 13.5h13"/><path d="M8 2.8v4.4"/><path d="M6.1 5.3 8 7.2l1.9-1.9"/></g></svg></span></div><div class="wkblk wk-prep" data-rid="fri-0" data-who="Prat|Groom Family" data-detail="Fri, Oct 23
 Prat's milk bath, close family only
 8:00 AM – 9:00 AM (1 hr)
 Prat, Groom Family
@@ -1022,7 +1030,7 @@ Prep or logistics · New"
             title="Prat's milk bath, close family only · 8:00 AM – 9:00 AM">
             <div class="wkname">Prat's milk bath, close family only</div>
             <div class="wkrange">8:00 AM – 9:00 AM</div>
-          </div><div class="wkblk wk-prep" data-who="Simran|Prat|Bernardo|Bride Family|Groom Family" data-detail="Fri, Oct 23
+          </div><div class="wkblk wk-prep" data-rid="fri-1" data-who="Simran|Prat|Bernardo|Bride Family|Groom Family" data-detail="Fri, Oct 23
 Ceremony rehearsal with Bernardo, immediate family only (no bridal party). Bernardo estimated an hour to an hour and a half
 10:00 AM – 11:30 AM (1 hr 30)
 Simran, Prat, Bernardo, Bride Family, Groom Family
@@ -1031,7 +1039,7 @@ Prep or logistics · New"
             title="Ceremony rehearsal with Bernardo, immediate family only (no bridal party). Bernardo estimated an hour to an hour and a half · 10:00 AM – 11:30 AM">
             <div class="wkname">Ceremony rehearsal with Bernardo, immediate family only (no bridal party). Bernardo estimated an hour to an hour and a half</div>
             <div class="wkrange">10:00 AM – 11:30 AM</div>
-          </div><div class="wkblk wk-prep" data-who="Simran|MUAH" data-detail="Fri, Oct 23
+          </div><div class="wkblk wk-prep" data-rid="fri-2" data-who="Simran|MUAH" data-detail="Fri, Oct 23
 Simran's hair and makeup in her room, ready at 4:00 PM (2 hr, per Claudio's itinerary of Sep 29)
 2:00 PM – 4:00 PM (2 hr)
 Simran, MUAH
@@ -1040,7 +1048,7 @@ Prep or logistics · New"
             title="Simran's hair and makeup in her room, ready at 4:00 PM (2 hr, per Claudio's itinerary of Sep 29) · 2:00 PM – 4:00 PM">
             <div class="wkname">Simran's hair and makeup in her room, ready at 4:00 PM (2 hr, per Claudio's itinerary of Sep 29)</div>
             <div class="wkrange">2:00 PM – 4:00 PM</div>
-          </div><div class="wkblk wk-shoot" data-who="Jakobz Media" data-detail="Fri, Oct 23
+          </div><div class="wkblk wk-shoot" data-rid="fri-3" data-who="Jakobz Media" data-detail="Fri, Oct 23
 Photo and video team arrives and sets up
 4:00 PM – 4:30 PM (30 min)
 Jakobz Media
@@ -1049,7 +1057,7 @@ Photo and video · Proposed"
             title="Photo and video team arrives and sets up · 4:00 PM – 4:30 PM">
             <div class="wkname">Photo and video team arrives and sets up</div>
             
-          </div><div class="wkblk wk-shoot" data-who="Simran|Prat|Jakobz Media" data-detail="Fri, Oct 23
+          </div><div class="wkblk wk-shoot" data-rid="fri-4" data-who="Simran|Prat|Jakobz Media" data-detail="Fri, Oct 23
 Couple shoot with photo and video team, straight into family photos
 4:30 PM – 5:30 PM (1 hr)
 Simran, Prat, Jakobz Media
@@ -1058,7 +1066,7 @@ Photo and video · Proposed"
             title="Couple shoot with photo and video team, straight into family photos · 4:30 PM – 5:30 PM">
             <div class="wkname">Couple shoot with photo and video team, straight into family photos</div>
             <div class="wkrange">4:30 PM – 5:30 PM</div>
-          </div><div class="wkblk wk-shoot" data-who="Simran|Prat|Bride Family|Groom Family|Jakobz Media" data-detail="Fri, Oct 23
+          </div><div class="wkblk wk-shoot" data-rid="fri-5" data-who="Simran|Prat|Bride Family|Groom Family|Jakobz Media" data-detail="Fri, Oct 23
 Immediate family photos
 5:30 PM – 6:00 PM (30 min)
 Simran, Prat, Bride Family, Groom Family, Jakobz Media
@@ -1067,7 +1075,7 @@ Photo and video · New"
             title="Immediate family photos · 5:30 PM – 6:00 PM">
             <div class="wkname">Immediate family photos</div>
             
-          </div><div class="wkblk wk-event" data-who="Simran|Prat|Guests|DJ / MC|Jakobz Media|Mehndi artist" data-detail="Fri, Oct 23
+          </div><div class="wkblk wk-event" data-rid="fri-6" data-who="Simran|Prat|Guests|DJ / MC|Jakobz Media|Mehndi artist" data-detail="Fri, Oct 23
 Sangeet &amp; Mehndi, pictures with each performance group
 6:00 PM – 10:00 PM (4 hr)
 Simran, Prat, Guests, DJ / MC, Jakobz Media, Mehndi artist
@@ -1076,7 +1084,7 @@ Event · In timeline"
             title="Sangeet &amp; Mehndi, pictures with each performance group · 6:00 PM – 10:00 PM">
             <div class="wkname">Sangeet &amp; Mehndi, pictures with each performance group</div>
             <div class="wkrange">6:00 PM – 10:00 PM</div>
-          </div></div><div class="wkcol" data-day="sat"><div class="hline" style="top:0px"></div><div class="hline" style="top:36px"></div><div class="hline" style="top:72px"></div><div class="hline" style="top:108px"></div><div class="hline" style="top:144px"></div><div class="hline" style="top:180px"></div><div class="hline" style="top:216px"></div><div class="hline" style="top:252px"></div><div class="hline" style="top:288px"></div><div class="hline" style="top:324px"></div><div class="hline" style="top:360px"></div><div class="hline" style="top:396px"></div><div class="hline" style="top:432px"></div><div class="hline" style="top:468px"></div><div class="hline" style="top:504px"></div><div class="hline" style="top:540px"></div><div class="hline" style="top:576px"></div><div class="hline" style="top:612px"></div><div class="hline" style="top:648px"></div><div class="hline" style="top:684px"></div><div class="hline" style="top:720px"></div><div class="hline" style="top:756px"></div><div class="hline" style="top:792px"></div><div class="wksun" style="top:171.6px"><span title="Sunrise 6:46 AM"><svg class="sunicon" viewBox="0 0 16 16" fill="none" aria-hidden="true"><g stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"><path d="M4.5 13.5a3.5 3.5 0 0 1 7 0"/><path d="M1.5 13.5h13"/><path d="M8 2.8v4.4"/><path d="M6.1 4.7 8 2.8l1.9 1.9"/></g></svg></span></div><div class="wksun" style="top:586.8000000000001px"><span title="Sunset 6:18 PM"><svg class="sunicon" viewBox="0 0 16 16" fill="none" aria-hidden="true"><g stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"><path d="M4.5 13.5a3.5 3.5 0 0 1 7 0"/><path d="M1.5 13.5h13"/><path d="M8 2.8v4.4"/><path d="M6.1 5.3 8 7.2l1.9-1.9"/></g></svg></span></div><div class="wkblk wk-prep" data-who="MUAH" data-detail="Sat, Oct 24
+          </div></div><div class="wkcol" data-day="sat"><div class="hline" style="top:0px"></div><div class="hline" style="top:36px"></div><div class="hline" style="top:72px"></div><div class="hline" style="top:108px"></div><div class="hline" style="top:144px"></div><div class="hline" style="top:180px"></div><div class="hline" style="top:216px"></div><div class="hline" style="top:252px"></div><div class="hline" style="top:288px"></div><div class="hline" style="top:324px"></div><div class="hline" style="top:360px"></div><div class="hline" style="top:396px"></div><div class="hline" style="top:432px"></div><div class="hline" style="top:468px"></div><div class="hline" style="top:504px"></div><div class="hline" style="top:540px"></div><div class="hline" style="top:576px"></div><div class="hline" style="top:612px"></div><div class="hline" style="top:648px"></div><div class="hline" style="top:684px"></div><div class="hline" style="top:720px"></div><div class="hline" style="top:756px"></div><div class="hline" style="top:792px"></div><div class="wksun" style="top:171.6px"><span title="Sunrise 6:46 AM"><svg class="sunicon" viewBox="0 0 16 16" fill="none" aria-hidden="true"><g stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"><path d="M4.5 13.5a3.5 3.5 0 0 1 7 0"/><path d="M1.5 13.5h13"/><path d="M8 2.8v4.4"/><path d="M6.1 4.7 8 2.8l1.9 1.9"/></g></svg></span></div><div class="wksun" style="top:586.8000000000001px"><span title="Sunset 6:18 PM"><svg class="sunicon" viewBox="0 0 16 16" fill="none" aria-hidden="true"><g stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"><path d="M4.5 13.5a3.5 3.5 0 0 1 7 0"/><path d="M1.5 13.5h13"/><path d="M8 2.8v4.4"/><path d="M6.1 5.3 8 7.2l1.9-1.9"/></g></svg></span></div><div class="wkblk wk-prep" data-rid="sat-0" data-who="MUAH" data-detail="Sat, Oct 24
 Claudio and the hairstylist arrive at the bridal suite and set up. Claudio's own notes say 3:00; the Oct 19 timeline says 3:15, which halves his setup window
 3:00 AM – 3:30 AM (30 min)
 MUAH
@@ -1085,7 +1093,7 @@ Prep or logistics · New"
             title="Claudio and the hairstylist arrive at the bridal suite and set up. Claudio's own notes say 3:00; the Oct 19 timeline says 3:15, which halves his setup window · 3:00 AM – 3:30 AM">
             <div class="wkname">Claudio and the hairstylist arrive at the bridal suite and set up. Claudio's own notes say 3:00; the Oct 19 timeline says 3:15, which halves his setup window</div>
             
-          </div><div class="wkblk wk-prep" data-who="Simran|MUAH" data-detail="Sat, Oct 24
+          </div><div class="wkblk wk-prep" data-rid="sat-1" data-who="Simran|MUAH" data-detail="Sat, Oct 24
 Simran's hair and makeup in the bridal suite (1 hr 30 plus 15 min for accessories)
 3:30 AM – 5:30 AM (2 hr)
 Simran, MUAH
@@ -1094,7 +1102,7 @@ Prep or logistics · New"
             title="Simran's hair and makeup in the bridal suite (1 hr 30 plus 15 min for accessories) · 3:30 AM – 5:30 AM">
             <div class="wkname">Simran's hair and makeup in the bridal suite (1 hr 30 plus 15 min for accessories)</div>
             <div class="wkrange">3:30 AM – 5:30 AM</div>
-          </div><div class="wkblk wk-prep" data-who="Prat|Groom Family" data-detail="Sat, Oct 24
+          </div><div class="wkblk wk-prep" data-rid="sat-2" data-who="Prat|Groom Family" data-detail="Sat, Oct 24
 Prat's prep: turban tying or pre-made turban, his mom and Praveena help with the outfit
 4:30 AM – 6:00 AM (1 hr 30)
 Prat, Groom Family
@@ -1103,7 +1111,7 @@ Prep or logistics · In timeline"
             title="Prat's prep: turban tying or pre-made turban, his mom and Praveena help with the outfit · 4:30 AM – 6:00 AM">
             <div class="wkname">Prat's prep: turban tying or pre-made turban, his mom and Praveena help with the outfit</div>
             <div class="wkrange">4:30 AM – 6:00 AM</div>
-          </div><div class="wkblk wk-prep" data-who="Simran|Prat|Hotel" data-detail="Sat, Oct 24
+          </div><div class="wkblk wk-prep" data-rid="sat-3" data-who="Simran|Prat|Hotel" data-detail="Sat, Oct 24
 Vegetarian breakfast sent to both rooms and the bridal suite (ordered with Ingrid)
 5:00 AM – 5:15 AM (15 min)
 Simran, Prat, Hotel
@@ -1112,7 +1120,7 @@ Prep or logistics · In timeline"
             title="Vegetarian breakfast sent to both rooms and the bridal suite (ordered with Ingrid) · 5:00 AM – 5:15 AM">
             <div class="wkname">Vegetarian breakfast sent to both rooms and the bridal suite (ordered with Ingrid)</div>
             
-          </div><div class="wkblk wk-shoot" data-who="Jakobz Media" data-detail="Sat, Oct 24
+          </div><div class="wkblk wk-shoot" data-rid="sat-5" data-who="Jakobz Media" data-detail="Sat, Oct 24
 Photo and video team in both rooms for detail and getting-ready shots: Mumum fixes the chunni, bridesmaids in robes, and reaction footage of Mumum, Bobbu Annie and Baba Annie watching Simran get ready
 5:30 AM – 6:15 AM (45 min)
 Jakobz Media
@@ -1121,7 +1129,7 @@ Photo and video · In timeline"
             title="Photo and video team in both rooms for detail and getting-ready shots: Mumum fixes the chunni, bridesmaids in robes, and reaction footage of Mumum, Bobbu Annie and Baba Annie watching Simran get ready · 5:30 AM – 6:15 AM">
             <div class="wkname">Photo and video team in both rooms for detail and getting-ready shots: Mumum fixes the chunni, bridesmaids in robes, and reaction footage of Mumum, Bobbu Annie and Baba Annie watching Simran get ready</div>
             
-          </div><div class="wkblk wk-prep" data-who="Simran|MUAH|Jakobz Media" data-detail="Sat, Oct 24
+          </div><div class="wkblk wk-prep" data-rid="sat-4" data-who="Simran|MUAH|Jakobz Media" data-detail="Sat, Oct 24
 Bindi and shawl pinning, ready by 6:00 AM
 5:30 AM – 6:00 AM (30 min)
 Simran, MUAH, Jakobz Media
@@ -1130,7 +1138,7 @@ Prep or logistics · New"
             title="Bindi and shawl pinning, ready by 6:00 AM · 5:30 AM – 6:00 AM">
             <div class="wkname">Bindi and shawl pinning, ready by 6:00 AM</div>
             
-          </div><div class="wkblk wk-prep" data-who="Simran|Prat|Jakobz Media|Bridesmaids" data-detail="Sat, Oct 24
+          </div><div class="wkblk wk-prep" data-rid="sat-6" data-who="Simran|Prat|Jakobz Media|Bridesmaids" data-detail="Sat, Oct 24
 Travel to the La Perla gazebo
 6:30 AM – 6:45 AM (15 min)
 Simran, Prat, Jakobz Media, Bridesmaids
@@ -1139,7 +1147,7 @@ Prep or logistics · In timeline"
             title="Travel to the La Perla gazebo · 6:30 AM – 6:45 AM">
             <div class="wkname">Travel to the La Perla gazebo</div>
             
-          </div><div class="wkblk wk-shoot" data-who="Simran|Prat|Jakobz Media|Bridesmaids|Groomsmen|Bride Family|Groom Family" data-detail="Sat, Oct 24
+          </div><div class="wkblk wk-shoot" data-rid="sat-7" data-who="Simran|Prat|Jakobz Media|Bridesmaids|Groomsmen|Bride Family|Groom Family" data-detail="Sat, Oct 24
 Pre-ceremony photo shoot at the La Perla gazebo (sunrise 6:46 AM)
 6:45 AM – 9:00 AM (2 hr 15)
 Simran, Prat, Jakobz Media, Bridesmaids, Groomsmen, Bride Family, Groom Family
@@ -1148,7 +1156,7 @@ Photo and video · In timeline"
             title="Pre-ceremony photo shoot at the La Perla gazebo (sunrise 6:46 AM) · 6:45 AM – 9:00 AM">
             <div class="wkname">Pre-ceremony photo shoot at the La Perla gazebo (sunrise 6:46 AM)</div>
             <div class="wkrange">6:45 AM – 9:00 AM</div>
-          </div><div class="wkblk wk-shoot" data-who="MUAH" data-detail="Sat, Oct 24
+          </div><div class="wkblk wk-shoot" data-rid="sat-8" data-who="MUAH" data-detail="Sat, Oct 24
 Claudio on call for touch-ups (no extra cost). He offered 6:30 to 8:30, so the last half hour of the shoot falls outside it — ask whether he'll stay to 9:00
 6:45 AM – 8:30 AM (1 hr 45)
 MUAH
@@ -1157,7 +1165,7 @@ Photo and video · New"
             title="Claudio on call for touch-ups (no extra cost). He offered 6:30 to 8:30, so the last half hour of the shoot falls outside it — ask whether he'll stay to 9:00 · 6:45 AM – 8:30 AM">
             <div class="wkname">Claudio on call for touch-ups (no extra cost). He offered 6:30 to 8:30, so the last half hour of the shoot falls outside it — ask whether he'll stay to 9:00</div>
             <div class="wkrange">6:45 AM – 8:30 AM</div>
-          </div><div class="wkblk wk-prep" data-who="Simran|MUAH" data-detail="Sat, Oct 24
+          </div><div class="wkblk wk-prep" data-rid="sat-10" data-who="Simran|MUAH" data-detail="Sat, Oct 24
 Claudio does makeup touch-ups and pins the veil as the final look. Simran's entrance isn't until 10:27, so his full hour fits
 9:00 AM – 10:00 AM (1 hr)
 Simran, MUAH
@@ -1166,7 +1174,7 @@ Prep or logistics · In timeline"
             title="Claudio does makeup touch-ups and pins the veil as the final look. Simran's entrance isn't until 10:27, so his full hour fits · 9:00 AM – 10:00 AM">
             <div class="wkname">Claudio does makeup touch-ups and pins the veil as the final look. Simran's entrance isn't until 10:27, so his full hour fits</div>
             <div class="wkrange">9:00 AM – 10:00 AM</div>
-          </div><div class="wkblk wk-prep" data-who="Guests" data-detail="Sat, Oct 24
+          </div><div class="wkblk wk-prep" data-rid="sat-9" data-who="Guests" data-detail="Sat, Oct 24
 Guests arrive (told 9:00 AM, half an hour before the baraat, so late arrivals don't delay it)
 9:00 AM – 9:30 AM (30 min)
 Guests
@@ -1175,7 +1183,7 @@ Prep or logistics · New"
             title="Guests arrive (told 9:00 AM, half an hour before the baraat, so late arrivals don't delay it) · 9:00 AM – 9:30 AM">
             <div class="wkname">Guests arrive (told 9:00 AM, half an hour before the baraat, so late arrivals don't delay it)</div>
             
-          </div><div class="wkblk wk-prep" data-who="Prat|Groom Family|Groomsmen" data-detail="Sat, Oct 24
+          </div><div class="wkblk wk-prep" data-rid="sat-11" data-who="Prat|Groom Family|Groomsmen" data-detail="Sat, Oct 24
 Groom's side meets in the lobby
 9:15 AM – 9:30 AM (15 min)
 Prat, Groom Family, Groomsmen
@@ -1184,7 +1192,7 @@ Prep or logistics · In timeline"
             title="Groom's side meets in the lobby · 9:15 AM – 9:30 AM">
             <div class="wkname">Groom's side meets in the lobby</div>
             
-          </div><div class="wkblk wk-event" data-who="Prat|Groom Family|Groomsmen|Guests|Jakobz Media" data-detail="Sat, Oct 24
+          </div><div class="wkblk wk-event" data-rid="sat-13" data-who="Prat|Groom Family|Groomsmen|Guests|Jakobz Media" data-detail="Sat, Oct 24
 Baraat: Prat's procession sets off from the North Bar and dances to the Kanna Bridge, likely 20 to 30 minutes. Colour bombs go off outside on the planner's count. It has to arrive by 10:00
 9:30 AM – 10:00 AM (30 min)
 Prat, Groom Family, Groomsmen, Guests, Jakobz Media
@@ -1193,7 +1201,7 @@ Event · In timeline"
             title="Baraat: Prat's procession sets off from the North Bar and dances to the Kanna Bridge, likely 20 to 30 minutes. Colour bombs go off outside on the planner's count. It has to arrive by 10:00 · 9:30 AM – 10:00 AM">
             <div class="wkname">Baraat: Prat's procession sets off from the North Bar and dances to the Kanna Bridge, likely 20 to 30 minutes. Colour bombs go off outside on the planner's count. It has to arrive by 10:00</div>
             
-          </div><div class="wkblk wk-prep" data-who="Bride Family|Hotel" data-detail="Sat, Oct 24
+          </div><div class="wkblk wk-prep" data-rid="sat-12" data-who="Bride Family|Hotel" data-detail="Sat, Oct 24
 Bride's side meets at the venue. Coconut station set up at the entrance at 45 degrees, finished by 9:30
 9:30 AM – 9:45 AM (15 min)
 Bride Family, Hotel
@@ -1202,7 +1210,7 @@ Prep or logistics · In timeline"
             title="Bride's side meets at the venue. Coconut station set up at the entrance at 45 degrees, finished by 9:30 · 9:30 AM – 9:45 AM">
             <div class="wkname">Bride's side meets at the venue. Coconut station set up at the entrance at 45 degrees, finished by 9:30</div>
             
-          </div><div class="wkblk wk-event" data-who="Simran|Prat|Bernardo|Bride Family|Groom Family|Bridesmaids|Groomsmen|Guests|Jakobz Media" data-detail="Sat, Oct 24
+          </div><div class="wkblk wk-event" data-rid="sat-15" data-who="Simran|Prat|Bernardo|Bride Family|Groom Family|Bridesmaids|Groomsmen|Guests|Jakobz Media" data-detail="Sat, Oct 24
 Ceremony
 10:00 AM – 12:05 PM (2 hr 5)
 Simran, Prat, Bernardo, Bride Family, Groom Family, Bridesmaids, Groomsmen, Guests, Jakobz Media
@@ -1211,7 +1219,7 @@ Event · In timeline"
             title="Ceremony · 10:00 AM – 12:05 PM">
             <div class="wkname">Ceremony</div>
             <div class="wkrange">10:00 AM – 12:05 PM</div>
-          </div><div class="wkblk wk-prep" data-who="Simran|Bridesmaids" data-detail="Sat, Oct 24
+          </div><div class="wkblk wk-prep" data-rid="sat-14" data-who="Simran|Bridesmaids" data-detail="Sat, Oct 24
 Simran waits out of sight with the bridesmaids until her entrance
 10:15 AM – 10:27 AM (12 min)
 Simran, Bridesmaids
@@ -1220,7 +1228,7 @@ Prep or logistics · Derived"
             title="Simran waits out of sight with the bridesmaids until her entrance · 10:15 AM – 10:27 AM">
             <div class="wkname">Simran waits out of sight with the bridesmaids until her entrance</div>
             
-          </div><div class="wkblk wk-shoot" data-who="Simran|Prat|Bride Family|Groom Family|Guests|Jakobz Media" data-detail="Sat, Oct 24
+          </div><div class="wkblk wk-shoot" data-rid="sat-16" data-who="Simran|Prat|Bride Family|Groom Family|Guests|Jakobz Media" data-detail="Sat, Oct 24
 Petal toss on the exit, then family photos. No post-ceremony rituals
 12:05 PM – 12:35 PM (30 min)
 Simran, Prat, Bride Family, Groom Family, Guests, Jakobz Media
@@ -1229,7 +1237,7 @@ Photo and video · New"
             title="Petal toss on the exit, then family photos. No post-ceremony rituals · 12:05 PM – 12:35 PM">
             <div class="wkname">Petal toss on the exit, then family photos. No post-ceremony rituals</div>
             
-          </div><div class="wkblk wk-prep" data-who="Guests|Hotel" data-detail="Sat, Oct 24
+          </div><div class="wkblk wk-prep" data-rid="sat-17" data-who="Guests|Hotel" data-detail="Sat, Oct 24
 Post-ceremony lunch in the ballroom, open for guests (Simran and Prat don't need to be there)
 12:30 PM – 2:30 PM (2 hr)
 Guests, Hotel
@@ -1238,7 +1246,7 @@ Prep or logistics · In timeline"
             title="Post-ceremony lunch in the ballroom, open for guests (Simran and Prat don't need to be there) · 12:30 PM – 2:30 PM">
             <div class="wkname">Post-ceremony lunch in the ballroom, open for guests (Simran and Prat don't need to be there)</div>
             <div class="wkrange">12:30 PM – 2:30 PM</div>
-          </div><div class="wkblk wk-prep" data-who="Simran|Prat|Bride Family|Groom Family" data-detail="Sat, Oct 24
+          </div><div class="wkblk wk-prep" data-rid="sat-18" data-who="Simran|Prat|Bride Family|Groom Family" data-detail="Sat, Oct 24
 Bride's side gives gifts to the groom's side in their room
 2:30 PM – 3:30 PM (1 hr)
 Simran, Prat, Bride Family, Groom Family
@@ -1247,7 +1255,7 @@ Prep or logistics · New"
             title="Bride's side gives gifts to the groom's side in their room · 2:30 PM – 3:30 PM">
             <div class="wkname">Bride's side gives gifts to the groom's side in their room</div>
             <div class="wkrange">2:30 PM – 3:30 PM</div>
-          </div><div class="wkblk wk-prep" data-who="Simran|MUAH" data-detail="Sat, Oct 24
+          </div><div class="wkblk wk-prep" data-rid="sat-19" data-who="Simran|MUAH" data-detail="Sat, Oct 24
 Simran's hair and makeup for the reception, back in her own room. Ready and fully dressed at 6:00 PM (2 hr, per Claudio's itinerary of Sep 29)
 4:00 PM – 6:00 PM (2 hr)
 Simran, MUAH
@@ -1256,7 +1264,7 @@ Prep or logistics · New"
             title="Simran's hair and makeup for the reception, back in her own room. Ready and fully dressed at 6:00 PM (2 hr, per Claudio's itinerary of Sep 29) · 4:00 PM – 6:00 PM">
             <div class="wkname">Simran's hair and makeup for the reception, back in her own room. Ready and fully dressed at 6:00 PM (2 hr, per Claudio's itinerary of Sep 29)</div>
             <div class="wkrange">4:00 PM – 6:00 PM</div>
-          </div><div class="wkblk wk-shoot" data-who="Jakobz Media" data-detail="Sat, Oct 24
+          </div><div class="wkblk wk-shoot" data-rid="sat-20" data-who="Jakobz Media" data-detail="Sat, Oct 24
 Photo and video team arrives and sets up
 6:00 PM – 6:30 PM (30 min)
 Jakobz Media
@@ -1265,7 +1273,7 @@ Photo and video · Proposed"
             title="Photo and video team arrives and sets up · 6:00 PM – 6:30 PM">
             <div class="wkname">Photo and video team arrives and sets up</div>
             
-          </div><div class="wkblk wk-shoot" data-who="Simran|Prat|Bride Family|Groom Family|Jakobz Media" data-detail="Sat, Oct 24
+          </div><div class="wkblk wk-shoot" data-rid="sat-21" data-who="Simran|Prat|Bride Family|Groom Family|Jakobz Media" data-detail="Sat, Oct 24
 Close family photos, reception outfits
 6:30 PM – 7:00 PM (30 min)
 Simran, Prat, Bride Family, Groom Family, Jakobz Media
@@ -1274,7 +1282,7 @@ Photo and video · Proposed"
             title="Close family photos, reception outfits · 6:30 PM – 7:00 PM">
             <div class="wkname">Close family photos, reception outfits</div>
             
-          </div><div class="wkblk wk-event" data-who="Simran|Prat|Guests|DJ / MC|Jakobz Media" data-detail="Sat, Oct 24
+          </div><div class="wkblk wk-event" data-rid="sat-23" data-who="Simran|Prat|Guests|DJ / MC|Jakobz Media" data-detail="Sat, Oct 24
 Reception, from cocktail hour to last dance
 7:00 PM – 1:00 AM (6 hr)
 Simran, Prat, Guests, DJ / MC, Jakobz Media
@@ -1283,7 +1291,7 @@ Event · In timeline"
             title="Reception, from cocktail hour to last dance · 7:00 PM – 1:00 AM">
             <div class="wkname">Reception, from cocktail hour to last dance</div>
             <div class="wkrange">7:00 PM – 1:00 AM</div>
-          </div><div class="wkblk wk-shoot" data-who="Simran|Prat|Jakobz Media" data-detail="Sat, Oct 24
+          </div><div class="wkblk wk-shoot" data-rid="sat-22" data-who="Simran|Prat|Jakobz Media" data-detail="Sat, Oct 24
 Couple portraits during cocktail hour (Simran and Prat skip cocktails)
 7:00 PM – 7:45 PM (45 min)
 Simran, Prat, Jakobz Media
@@ -1530,26 +1538,66 @@ Photo and video · New"
   var API = "https://api.github.com/repos/" + REPO + "/contents/" + FILE;
   var TKEY = "wwp-edit-token";
 
-  var editing = /[?&]edit=1/.test(location.search);
+  /* The page is public, so the edit bar must never render for guests. A stored token is
+     the signal that this browser is Simran's: once ?edit=1 has been used here and a token
+     saved, the plain URL shows the bar too. ?edit=0 suppresses it for one page load. */
+  var hasToken = false;
+  try { hasToken = !!localStorage.getItem("wwp-edit-token"); } catch (e) {}
+  var editing = !/[?&]edit=0/.test(location.search) &&
+    (/[?&]edit=1/.test(location.search) || hasToken);
   var data = { notice: "", rows: {} };
   var sha = null;
 
   function txt(el) { return (el.textContent || "").replace(/\s+/g, " ").trim(); }
   function byId(id) { return document.getElementById(id); }
 
+  /* The same row is drawn in up to three places: the day-by-day list, the week grid, and
+     the run-of-show dropdowns. They all carry the same data-rid, so one edit updates all
+     of them. Time is .rtime in the lists and .wkrange in the week grid; the description is
+     .rwhat or .wkname. */
+  var SEL = { time: ".rtime, .wkrange", what: ".rwhat, .wkname" };
+
+  /* A day row contains its own run-of-show sub-rows, and those carry their own data-rid.
+     Every lookup has to stop at the nearest data-rid or a day row would swallow its
+     sub-rows and one edit would write several overrides. */
+  function own(box, sel) {
+    var out = [];
+    box.querySelectorAll(sel).forEach(function (n) {
+      if (n.closest("[data-rid]") === box) out.push(n);
+    });
+    return out;
+  }
+
+  function nodes(rid, field) {
+    var out = [];
+    document.querySelectorAll('[data-rid="' + rid + '"]').forEach(function (box) {
+      own(box, SEL[field]).forEach(function (n) { out.push(n); });
+    });
+    return out;
+  }
+
   /* Remember the generated text before anything is layered over it, so an override can
      tell whether the row underneath has since been rebuilt and changed. */
-  document.querySelectorAll(".drow").forEach(function (row) {
-    ["rtime", "rwhat"].forEach(function (cls) {
-      var el = row.querySelector("." + cls);
-      if (el) el.dataset.base = txt(el);
+  document.querySelectorAll("[data-rid]").forEach(function (box) {
+    own(box, ".rtime, .rwhat, .wkname, .wkrange").forEach(function (el) {
+      el.dataset.base = txt(el);
     });
   });
 
-  function parts(rid) {
-    var row = document.querySelector('[data-rid="' + rid + '"]');
-    if (!row) return null;
-    return { row: row, rtime: row.querySelector(".rtime"), rwhat: row.querySelector(".rwhat") };
+  /* The week grid's hover text and side panel are built from attributes, so they have to
+     be refreshed by hand whenever an override lands. */
+  function syncWeekAttrs(rid) {
+    var src = document.querySelector('.drow[data-rid="' + rid + '"]') ||
+      document.querySelector('.srow[data-rid="' + rid + '"]');
+    if (!src) return;
+    var tm = own(src, ".rtime")[0], wt = own(src, ".rwhat")[0];
+    document.querySelectorAll('.wkblk[data-rid="' + rid + '"]').forEach(function (b) {
+      var d = (b.getAttribute("data-detail") || "").split("\n");
+      if (wt && d.length > 1) d[1] = txt(wt);
+      if (tm && d.length > 2) d[2] = txt(tm);
+      b.setAttribute("data-detail", d.join("\n"));
+      b.setAttribute("title", (wt ? txt(wt) : "") + (tm ? " \u00b7 " + txt(tm) : ""));
+    });
   }
 
   function drawNotice() {
@@ -1568,15 +1616,22 @@ Photo and video · New"
     var stale = [];
     Object.keys(data.rows || {}).forEach(function (rid) {
       var ov = data.rows[rid] || {};
-      var p = parts(rid);
-      if (!p) { stale.push(rid); return; }
-      /* If the generated row no longer matches what was edited, the schedule was rebuilt
-         underneath this override. Leave the new text alone rather than overwrite it. */
-      if (ov.base && p.rwhat && p.rwhat.dataset.base !== ov.base) { stale.push(rid); return; }
-      ["rtime", "rwhat"].forEach(function (cls) {
-        var key = cls === "rtime" ? "time" : "what";
-        if (ov[key] && p[cls]) { p[cls].textContent = ov[key]; p[cls].classList.add("edited"); }
+      var anchor = document.querySelector('[data-rid="' + rid + '"]');
+      if (!anchor) { stale.push(rid); return; }
+      /* If the generated description no longer matches what was edited, the schedule was
+         rebuilt underneath this override. Leave the new text alone rather than overwrite it. */
+      if (ov.base) {
+        var w = nodes(rid, "what")[0];
+        if (w && w.dataset.base !== ov.base) { stale.push(rid); return; }
+      }
+      ["time", "what"].forEach(function (field) {
+        if (!ov[field]) return;
+        nodes(rid, field).forEach(function (n) {
+          n.textContent = ov[field];
+          n.classList.add("edited");
+        });
       });
+      syncWeekAttrs(rid);
     });
     drawNotice();
     return stale;
@@ -1596,33 +1651,93 @@ Photo and video · New"
     status(pending() + " Not live until you publish.");
   }
 
+  function wire(el, rid, field) {
+    el.setAttribute("contenteditable", "true");
+    el.addEventListener("keydown", function (ev) {
+      if (ev.key === "Enter") { ev.preventDefault(); el.blur(); }
+    });
+    el.addEventListener("blur", function () {
+      var now = txt(el);
+      var ov = data.rows[rid] || {};
+      if (now === el.dataset.base) delete ov[field];
+      else ov[field] = now;
+      var w = nodes(rid, "what")[0];
+      if (w) ov.base = w.dataset.base;
+      if (ov.time || ov.what) data.rows[rid] = ov;
+      else delete data.rows[rid];
+      /* Push the value to every other place this row is drawn. Reverting restores each
+         view's own wording, since the week grid omits the duration the day list shows. */
+      nodes(rid, field).forEach(function (n) {
+        if (n !== el) n.textContent = ov[field] || n.dataset.base || "";
+        if (ov[field]) n.classList.add("edited");
+        else n.classList.remove("edited");
+      });
+      syncWeekAttrs(rid);
+      touched();
+    });
+  }
+
+  /* Week blocks are a few pixels tall with truncated text, so they are edited through the
+     side panel that already opens when one is clicked, not in place. */
+  function panelFields(rid) {
+    var body = byId("wkdb");
+    var panel = document.querySelector(".wkdetail");
+    if (!body || !panel || panel.hidden) return;
+    var dayRow = document.querySelector('.drow[data-rid="' + rid + '"]');
+    var wkBlk = document.querySelector('.wkblk[data-rid="' + rid + '"]');
+    var src = {
+      time: (dayRow && own(dayRow, ".rtime")[0]) || (wkBlk && own(wkBlk, ".wkrange")[0]),
+      what: (dayRow && own(dayRow, ".rwhat")[0]) || (wkBlk && own(wkBlk, ".wkname")[0]),
+    };
+    var wrap = document.createElement("div");
+    wrap.className = "dtedit";
+    wrap.setAttribute("data-rid", rid);
+    [["Time", "time"], ["What", "what"]].forEach(function (f) {
+      var from = src[f[1]];
+      if (!from) return;
+      var lab = document.createElement("div");
+      lab.className = "dtlabel";
+      lab.textContent = f[0];
+      var val = document.createElement("div");
+      val.className = f[1] === "time" ? "rtime" : "rwhat";
+      val.textContent = txt(from);
+      val.dataset.base = from.dataset.base || txt(from);
+      if (from.classList.contains("edited")) val.classList.add("edited");
+      wire(val, rid, f[1]);
+      wrap.appendChild(lab);
+      wrap.appendChild(val);
+    });
+    /* The panel normally shows what, time, who and the source. The first two become the
+       fields above, so keep the rest underneath rather than dropping them. */
+    var rest = wkBlk ? (wkBlk.getAttribute("data-detail") || "").split("\n").slice(3) : [];
+    body.textContent = "";
+    body.appendChild(wrap);
+    if (rest.length) {
+      var tail = document.createElement("div");
+      tail.className = "dttail";
+      tail.textContent = rest.join("\n");
+      body.appendChild(tail);
+    }
+  }
+
   function enableEditing() {
     document.body.classList.add("editing");
     var bar = byId("editbar");
     if (bar) bar.hidden = false;
 
-    document.querySelectorAll(".drow").forEach(function (row) {
-      var rid = row.dataset.rid;
-      if (!rid) return;
-      ["rtime", "rwhat"].forEach(function (cls) {
-        var el = row.querySelector("." + cls);
-        if (!el) return;
-        el.setAttribute("contenteditable", "true");
-        el.addEventListener("keydown", function (ev) {
-          if (ev.key === "Enter") { ev.preventDefault(); el.blur(); }
+    document.querySelectorAll(".drow[data-rid], .srow[data-rid], .wkchip[data-rid]").forEach(
+      function (box) {
+        var rid = box.dataset.rid;
+        own(box, ".rtime, .rwhat").forEach(function (el) {
+          wire(el, rid, el.classList.contains("rtime") ? "time" : "what");
         });
-        el.addEventListener("blur", function () {
-          var now = txt(el);
-          var ov = data.rows[rid] || {};
-          var key = cls === "rtime" ? "time" : "what";
-          if (now === el.dataset.base) { delete ov[key]; el.classList.remove("edited"); }
-          else { ov[key] = now; el.classList.add("edited"); }
-          var w = row.querySelector(".rwhat");
-          if (w) ov.base = w.dataset.base;
-          if (ov.time || ov.what) data.rows[rid] = ov;
-          else delete data.rows[rid];
-          touched();
-        });
+      },
+    );
+
+    document.querySelectorAll(".wkblk[data-rid]").forEach(function (b) {
+      b.addEventListener("click", function () {
+        var rid = b.dataset.rid;
+        setTimeout(function () { panelFields(rid); }, 0);
       });
     });
 
@@ -1641,6 +1756,13 @@ Photo and video · New"
       data.rows = {};
       data.notice = "";
       publish(true);
+    });
+
+    var ob = byId("eoff");
+    if (ob) ob.addEventListener("click", function () {
+      if (!confirm("Leave edit mode on this device? Published changes stay up. You would need the ?edit=1 link and your token again to come back.")) return;
+      try { localStorage.removeItem(TKEY); } catch (e) {}
+      location.href = location.pathname;
     });
 
     var pb = byId("epublish");
@@ -1723,9 +1845,10 @@ Photo and video · New"
       if (editing) {
         loadSha();
         enableEditing();
-        status(stale.length
-          ? pending() + " " + stale.length + " edit(s) skipped, their rows were rebuilt."
-          : (Object.keys(data.rows).length ? pending() + " All live." : "No changes yet."));
+        var msg = Object.keys(data.rows).length ? pending() + " All live." : "No changes yet.";
+        if (stale.length) msg = pending() + " " + stale.length + " edit(s) skipped, their rows were rebuilt.";
+        if (!hasToken) msg += " This device isn't saved yet — publish once and the plain link will show this bar.";
+        status(msg);
       }
     });
 })();
