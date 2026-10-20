@@ -251,13 +251,13 @@ const rosConfig = {
     title: "Ceremony · ritual by ritual",
     trailing: "Kanna Bridge",
     intro:
-      "Sri Lankan Tamil and Nepali ceremony, from Bernardo's segment timings on the Jul 1 call. Clock times assume the groom's welcome starts at 9:45 AM, so everything shifts together if that moves.",
+      "Sri Lankan Tamil and Nepali ceremony, from the Latest Schedule tab of the Wedding Ceremony Breakdown doc. The groom's welcome starts at 10:00 AM, so everything shifts together if that moves.",
     blocks: ceremonyBlocks,
-    start: t(9, 45),
+    start: t(10),
     end: t(12),
     tickStep: 15,
     axisNote:
-      "Green blocks are the ceremony, start to finish. Photo and video cover all of it. Axis: 9:45 AM to 12:00 PM.",
+      "Green blocks are the ceremony, start to finish. Photo and video cover all of it. Axis: 10:00 AM to 12:00 PM.",
   },
   reception: {
     title: "Reception · full run of show",
@@ -287,14 +287,16 @@ function dateBadge(day, isLast) {
 
 function dayCard(day, isLast) {
   const rows = day.rows
-    .map((row) => {
+    .map((row, idx) => {
       const bold = row.what.startsWith("Photo and video team arrives") || isEvent(row);
       const tone = isEvent(row) ? "is-event" : isPhotoVideo(row) ? "is-shoot" : "";
       const what = row.expand
         ? runOfShow({ id: `${day.id}-${row.expand}`, rows: subRowsFor[row.expand], ...rosConfig[row.expand] })
-        : `<span class="${tone} ${bold ? "semib" : ""}">${esc(row.what)}</span>`;
-      return `<div class="drow" data-who="${esc(row.who.join("|"))}" data-expand="${esc(row.expand || "")}">
-        <span class="${tone} ${bold ? "semib" : ""}">${esc(rowTime(row))}</span>
+        : `<span class="rwhat ${tone} ${bold ? "semib" : ""}">${esc(row.what)}</span>`;
+      return `<div class="drow" data-rid="${esc(day.id)}-${idx}" data-who="${esc(
+        row.who.join("|"),
+      )}" data-expand="${esc(row.expand || "")}">
+        <span class="rtime ${tone} ${bold ? "semib" : ""}">${esc(rowTime(row))}</span>
         <div class="whatcell">${what}</div>
         <span class="t-ter small">${esc(row.source)}</span>
       </div>`;
@@ -483,9 +485,9 @@ const packingHtml = packingEvents
 
 const ceremonyHtml = [
   ...columns.map((c) => sectionCard(c.who, c.detail || "", itemList(c.items, "name", ["note"]))),
-  sectionCard("Coming from the resort and the vendors", "", itemList(resortItems, "name", ["note"])),
-  sectionCard("Closed by the decor quote", "", itemList(closedByDecor, "name", ["detail"])),
-  sectionCard("Still without an owner", "", itemList(unowned, "name", ["problem", "suggestion"])),
+  sectionCard("New ask for Ingrid at decor", "", itemList(resortItems, "name", ["note"])),
+  sectionCard("Confirmed from decor", "", itemList(closedByDecor, "name", ["detail"])),
+  sectionCard("Open questions", "", itemList(unowned, "name", ["problem", "suggestion"])),
   sectionCard(
     "Petal throwers",
     `${petalBrideSide.length} on the bride's side · ${petalGroomSide.length} on the groom's`,
@@ -757,6 +759,25 @@ li { margin-bottom: 10px; }
 footer { color: var(--t3); font-size: 12px; border-top: 1px solid var(--s3); padding-top: 14px; }
 [hidden] { display: none !important; }
 
+/* ---- live notice + edit mode ---- */
+#notice { border: 1px solid var(--s3); border-left: 3px solid #b45309; background: rgba(180,83,9,.07);
+  border-radius: 8px; padding: 10px 12px; font-size: 14px; line-height: 1.5; }
+#notice b { display: block; font-size: 11px; letter-spacing: .6px; text-transform: uppercase;
+  color: #b45309; margin-bottom: 3px; }
+.edited { border-left: 2px solid #b45309; padding-left: 6px; margin-left: -8px; }
+#editbar { position: sticky; top: 0; z-index: 40; display: flex; flex-wrap: wrap; gap: 8px;
+  align-items: center; background: #1f2937; color: #f9fafb; padding: 10px 12px; border-radius: 8px;
+  font-size: 13px; margin-bottom: 14px; }
+#editbar .grow { flex: 1 1 auto; min-width: 150px; }
+#editbar button { font: inherit; border: 0; border-radius: 6px; padding: 6px 11px; cursor: pointer;
+  background: #4b5563; color: #f9fafb; }
+#editbar button.primary { background: #059669; }
+#editbar button:disabled { opacity: .45; cursor: default; }
+#estat { opacity: .85; }
+body.editing [contenteditable="true"] { outline: 1px dashed #b45309; outline-offset: 2px;
+  border-radius: 3px; min-width: 28px; display: inline-block; }
+body.editing [contenteditable="true"]:focus { outline: 2px solid #059669; background: rgba(5,150,105,.08); }
+
 @media (max-width: 820px) {
   .rowhead, .drow { grid-template-columns: 1fr; gap: 2px; }
   .rowhead { display: none; }
@@ -771,6 +792,13 @@ footer { color: var(--t3); font-size: 12px; border-top: 1px solid var(--s3); pad
 </head>
 <body>
 <div class="wrap">
+  <div id="editbar" hidden>
+    <span class="grow"><b>Edit mode.</b> <span id="estat">No changes yet.</span></span>
+    <button type="button" id="enotice">Banner</button>
+    <button type="button" id="ediscard">Discard</button>
+    <button type="button" id="epublish" class="primary" disabled>Publish</button>
+  </div>
+  <div id="notice" hidden></div>
   <div class="stack" style="gap:6px">
     <h1>Simran and Prat's Wedding Schedule</h1>
     <p class="t-sec">Paradisus Playa del Carmen · Oct 20–24, 2026 · Jakobz Media. Arrival times assume
@@ -781,6 +809,7 @@ footer { color: var(--t3); font-size: 12px; border-top: 1px solid var(--s3); pad
   <div class="tabs" role="tablist">
     <button class="tab" role="tab" data-tab="day" aria-selected="true">Day by day</button>
     <button class="tab" role="tab" data-tab="week" aria-selected="false">Week at a glance</button>
+    <button class="tab" role="tab" data-tab="ceremony" aria-selected="false">Ceremony packing</button>
     <button class="tab" role="tab" data-tab="lists" aria-selected="false">Packing and items</button>
     <button class="tab" role="tab" data-tab="asks" aria-selected="false">Open questions</button>
   </div>
@@ -822,11 +851,16 @@ footer { color: var(--t3); font-size: 12px; border-top: 1px solid var(--s3); pad
     ${weekView()}
   </section>
 
-  <section data-panel="lists" hidden class="stack" style="gap:24px">
+  <section data-panel="ceremony" hidden class="stack" style="gap:24px">
     <div class="stack">
       <h2>Ceremony items and who brings them</h2>
+      <p class="t-ter small">From the Packing List tab of the Wedding Ceremony Breakdown doc,
+      synced Oct 5, 2026. The doc is the source of truth.</p>
       <div class="sectiongrid">${ceremonyHtml}</div>
     </div>
+  </section>
+
+  <section data-panel="lists" hidden class="stack" style="gap:24px">
     <div class="stack">
       <h2>Packing, event by event</h2>
       <div class="sectiongrid">${packingHtml}${sectionCard(
@@ -965,6 +999,217 @@ footer { color: var(--t3); font-size: 12px; border-top: 1px solid var(--s3); pad
       wrapEl.classList.add("withdetail");
     });
   });
+})();
+</script>
+
+<script>
+/* Live overrides. The page below is generated and never edited by hand; anything changed
+   from the site itself lands in overrides.json and is layered on top at load. Add ?edit=1
+   to the URL to get the editing bar. */
+(function () {
+  var REPO = "simkhanal0815/wedding-week-plan";
+  var FILE = "overrides.json";
+  var API = "https://api.github.com/repos/" + REPO + "/contents/" + FILE;
+  var TKEY = "wwp-edit-token";
+
+  var editing = /[?&]edit=1/.test(location.search);
+  var data = { notice: "", rows: {} };
+  var sha = null;
+
+  function txt(el) { return (el.textContent || "").replace(/\\s+/g, " ").trim(); }
+  function byId(id) { return document.getElementById(id); }
+
+  /* Remember the generated text before anything is layered over it, so an override can
+     tell whether the row underneath has since been rebuilt and changed. */
+  document.querySelectorAll(".drow").forEach(function (row) {
+    ["rtime", "rwhat"].forEach(function (cls) {
+      var el = row.querySelector("." + cls);
+      if (el) el.dataset.base = txt(el);
+    });
+  });
+
+  function parts(rid) {
+    var row = document.querySelector('[data-rid="' + rid + '"]');
+    if (!row) return null;
+    return { row: row, rtime: row.querySelector(".rtime"), rwhat: row.querySelector(".rwhat") };
+  }
+
+  function drawNotice() {
+    var n = byId("notice");
+    if (!n) return;
+    n.textContent = "";
+    if (!data.notice) { n.hidden = true; return; }
+    var b = document.createElement("b");
+    b.textContent = "Update";
+    n.appendChild(b);
+    n.appendChild(document.createTextNode(data.notice));
+    n.hidden = false;
+  }
+
+  function applyAll() {
+    var stale = [];
+    Object.keys(data.rows || {}).forEach(function (rid) {
+      var ov = data.rows[rid] || {};
+      var p = parts(rid);
+      if (!p) { stale.push(rid); return; }
+      /* If the generated row no longer matches what was edited, the schedule was rebuilt
+         underneath this override. Leave the new text alone rather than overwrite it. */
+      if (ov.base && p.rwhat && p.rwhat.dataset.base !== ov.base) { stale.push(rid); return; }
+      ["rtime", "rwhat"].forEach(function (cls) {
+        var key = cls === "rtime" ? "time" : "what";
+        if (ov[key] && p[cls]) { p[cls].textContent = ov[key]; p[cls].classList.add("edited"); }
+      });
+    });
+    drawNotice();
+    return stale;
+  }
+
+  /* ---------- edit mode ---------- */
+  function status(msg) { var e = byId("estat"); if (e) e.textContent = msg; }
+
+  function pending() {
+    var n = Object.keys(data.rows || {}).length;
+    return n === 1 ? "1 row edited." : n + " rows edited.";
+  }
+
+  function touched() {
+    var b = byId("epublish");
+    if (b) b.disabled = false;
+    status(pending() + " Not live until you publish.");
+  }
+
+  function enableEditing() {
+    document.body.classList.add("editing");
+    var bar = byId("editbar");
+    if (bar) bar.hidden = false;
+
+    document.querySelectorAll(".drow").forEach(function (row) {
+      var rid = row.dataset.rid;
+      if (!rid) return;
+      ["rtime", "rwhat"].forEach(function (cls) {
+        var el = row.querySelector("." + cls);
+        if (!el) return;
+        el.setAttribute("contenteditable", "true");
+        el.addEventListener("keydown", function (ev) {
+          if (ev.key === "Enter") { ev.preventDefault(); el.blur(); }
+        });
+        el.addEventListener("blur", function () {
+          var now = txt(el);
+          var ov = data.rows[rid] || {};
+          var key = cls === "rtime" ? "time" : "what";
+          if (now === el.dataset.base) { delete ov[key]; el.classList.remove("edited"); }
+          else { ov[key] = now; el.classList.add("edited"); }
+          var w = row.querySelector(".rwhat");
+          if (w) ov.base = w.dataset.base;
+          if (ov.time || ov.what) data.rows[rid] = ov;
+          else delete data.rows[rid];
+          touched();
+        });
+      });
+    });
+
+    var nb = byId("enotice");
+    if (nb) nb.addEventListener("click", function () {
+      var v = prompt("Banner across the top of the page, visible to everyone. Empty removes it.", data.notice || "");
+      if (v === null) return;
+      data.notice = v.trim();
+      drawNotice();
+      touched();
+    });
+
+    var db = byId("ediscard");
+    if (db) db.addEventListener("click", function () {
+      if (!confirm("Remove every edit and banner, putting the page back to the generated schedule? This publishes the reset.")) return;
+      data.rows = {};
+      data.notice = "";
+      publish(true);
+    });
+
+    var pb = byId("epublish");
+    if (pb) pb.addEventListener("click", function () { publish(false); });
+  }
+
+  function b64(str) {
+    var bytes = new TextEncoder().encode(str), out = "";
+    for (var i = 0; i < bytes.length; i++) out += String.fromCharCode(bytes[i]);
+    return btoa(out);
+  }
+
+  function token(force) {
+    var t = force ? null : localStorage.getItem(TKEY);
+    if (!t) {
+      t = prompt("GitHub token with Contents write access to wedding-week-plan. Stored only in this browser.");
+      if (t) { t = t.trim(); localStorage.setItem(TKEY, t); }
+    }
+    return t;
+  }
+
+  function publish(isReset) {
+    var t = token(false);
+    if (!t) return;
+    var btn = byId("epublish");
+    if (btn) btn.disabled = true;
+    status("Publishing...");
+    data.updated = new Date().toISOString();
+    var body = {
+      message: isReset ? "Clear schedule overrides" : "Schedule update from the site",
+      content: b64(JSON.stringify(data, null, 2)),
+    };
+    if (sha) body.sha = sha;
+    fetch(API, {
+      method: "PUT",
+      headers: { Authorization: "Bearer " + t, Accept: "application/vnd.github+json" },
+      body: JSON.stringify(body),
+    })
+      .then(function (r) {
+        if (r.status === 401 || r.status === 403) {
+          localStorage.removeItem(TKEY);
+          throw new Error("Token was rejected. Press Publish again to enter a new one.");
+        }
+        if (r.status === 409 || r.status === 422) {
+          throw new Error("Someone else published since this page loaded. Reload and redo the edit.");
+        }
+        if (!r.ok) throw new Error("GitHub returned " + r.status + ".");
+        return r.json();
+      })
+      .then(function (j) {
+        sha = j && j.content && j.content.sha;
+        status(isReset ? "Reset published. Reloading..." : "Published. The live page catches up in about a minute.");
+        if (isReset) setTimeout(function () { location.reload(); }, 1200);
+      })
+      .catch(function (e) {
+        if (btn) btn.disabled = false;
+        status(e.message);
+      });
+  }
+
+  function loadSha() {
+    fetch(API + "?cb=" + Date.now(), { cache: "no-store" })
+      .then(function (r) { return r.ok ? r.json() : null; })
+      .then(function (j) { if (j) sha = j.sha; })
+      .catch(function () {});
+  }
+
+  fetch(FILE + "?cb=" + Date.now(), { cache: "no-store" })
+    .then(function (r) { return r.ok ? r.json() : null; })
+    .then(function (j) {
+      if (j && typeof j === "object") {
+        data = j;
+        if (!data.rows) data.rows = {};
+        if (!data.notice) data.notice = "";
+      }
+    })
+    .catch(function () {})
+    .then(function () {
+      var stale = applyAll();
+      if (editing) {
+        loadSha();
+        enableEditing();
+        status(stale.length
+          ? pending() + " " + stale.length + " edit(s) skipped, their rows were rebuilt."
+          : (Object.keys(data.rows).length ? pending() + " All live." : "No changes yet."));
+      }
+    });
 })();
 </script>
 </body>
