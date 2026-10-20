@@ -1,5 +1,10 @@
 {
-  "updated": null,
+  "updated": "2026-10-20T02:01:50.953Z",
   "notice": "",
-  "rows": {}
+  "rows": {
+    "sat-6": {
+      "what": "Travel to the La Perla gazebo (TBD on photographer's choice)",
+      "base": "Travel to the La Perla gazebo"
+    }
+  }
 }
