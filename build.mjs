@@ -237,27 +237,27 @@ function runOfShow({ id, title, trailing, intro, blocks, rows, start, end, tickS
 const rosConfig = {
   prephotos: {
     title: "Pre-ceremony photo shoot",
-    trailing: "Before the 9:00 AM baraat",
+    trailing: "La Perla gazebo · before the 9:30 AM baraat",
     intro:
-      "First looks, private vows and group photos. The bridesmaids' first look is folded into the bridal party photos at the end rather than run separately. Prat heads to the baraat at 8:35 AM, before it starts at 9:00 AM.",
+      "First looks, private vows and group photos. The couple first look opens on sunrise at 6:45 AM, with Papa and the uncles after the vows. The bridesmaids' first look is folded into the bridal party photos at the end rather than run separately. Everything has to finish by 9:00 AM so Prat can meet the groom's side in the lobby at 9:15.",
     blocks: prePhotoBlocks,
-    start: t(6),
-    end: t(8, 45),
+    start: t(6, 30),
+    end: t(9),
     tickStep: 15,
     axisNote:
-      "Blue blocks are the moments photo and video must capture, gray is the walk down. Axis: 6:00 AM to 8:45 AM.",
+      "Blue blocks are the moments photo and video must capture, gray is the travel down. Axis: 6:30 AM to 9:00 AM.",
   },
   ceremony: {
     title: "Ceremony · ritual by ritual",
     trailing: "Kanna Bridge",
     intro:
-      "Sri Lankan Tamil and Nepali ceremony, from the Latest Schedule tab of the Wedding Ceremony Breakdown doc. The groom's welcome starts at 10:00 AM, so everything shifts together if that moves.",
+      "Sri Lankan Tamil and Nepali ceremony, using Bernardo's own segment lengths. The aarti welcome runs as the baraat arrives at 10:00 AM and the groom is escorted to the mandap at 10:15, so everything shifts together if the baraat runs long. The Ganesh Puja now comes before Simran's entrance, which Bernardo still needs to confirm.",
     blocks: ceremonyBlocks,
     start: t(10),
-    end: t(12),
+    end: t(12, 5),
     tickStep: 15,
     axisNote:
-      "Green blocks are the ceremony, start to finish. Photo and video cover all of it. Axis: 10:00 AM to 12:00 PM.",
+      "Green blocks are the ceremony, start to finish. Photo and video cover all of it. Axis: 10:00 AM to 12:05 PM.",
   },
   reception: {
     title: "Reception · full run of show",
