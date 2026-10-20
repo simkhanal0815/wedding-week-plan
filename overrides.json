@@ -1,10 +1,19 @@
 {
-  "updated": "2026-10-20T02:01:50.953Z",
+  "updated": "2026-10-20T02:37:59.060Z",
   "notice": "",
   "rows": {
     "sat-6": {
       "what": "Travel to the La Perla gazebo (TBD on photographer's choice)",
       "base": "Travel to the La Perla gazebo"
+    },
+    "ros-sat-prephotos-0": {
+      "time": "6:45 AM – 7:15 AM (45 min)",
+      "base": "First look with Prat, plus couple portraits. Sunrise is 6:46 AM, so this starts right on it",
+      "what": "First look with Prat + Couples Portraits + Vows. Sunrise is 6:46 AM, so this starts right on it"
+    },
+    "ros-sat-prephotos-1": {
+      "time": "7:15 - 7:30",
+      "base": "Private vows, Simran and Prat alone"
     }
   }
 }
