@@ -202,6 +202,25 @@ li { margin-bottom: 10px; }
 footer { color: var(--t3); font-size: 12px; border-top: 1px solid var(--s3); padding-top: 14px; }
 [hidden] { display: none !important; }
 
+/* ---- live notice + edit mode ---- */
+#notice { border: 1px solid var(--s3); border-left: 3px solid #b45309; background: rgba(180,83,9,.07);
+  border-radius: 8px; padding: 10px 12px; font-size: 14px; line-height: 1.5; }
+#notice b { display: block; font-size: 11px; letter-spacing: .6px; text-transform: uppercase;
+  color: #b45309; margin-bottom: 3px; }
+.edited { border-left: 2px solid #b45309; padding-left: 6px; margin-left: -8px; }
+#editbar { position: sticky; top: 0; z-index: 40; display: flex; flex-wrap: wrap; gap: 8px;
+  align-items: center; background: #1f2937; color: #f9fafb; padding: 10px 12px; border-radius: 8px;
+  font-size: 13px; margin-bottom: 14px; }
+#editbar .grow { flex: 1 1 auto; min-width: 150px; }
+#editbar button { font: inherit; border: 0; border-radius: 6px; padding: 6px 11px; cursor: pointer;
+  background: #4b5563; color: #f9fafb; }
+#editbar button.primary { background: #059669; }
+#editbar button:disabled { opacity: .45; cursor: default; }
+#estat { opacity: .85; }
+body.editing [contenteditable="true"] { outline: 1px dashed #b45309; outline-offset: 2px;
+  border-radius: 3px; min-width: 28px; display: inline-block; }
+body.editing [contenteditable="true"]:focus { outline: 2px solid #059669; background: rgba(5,150,105,.08); }
+
 @media (max-width: 820px) {
   .rowhead, .drow { grid-template-columns: 1fr; gap: 2px; }
   .rowhead { display: none; }
@@ -216,6 +235,13 @@ footer { color: var(--t3); font-size: 12px; border-top: 1px solid var(--s3); pad
 </head>
 <body>
 <div class="wrap">
+  <div id="editbar" hidden>
+    <span class="grow"><b>Edit mode.</b> <span id="estat">No changes yet.</span></span>
+    <button type="button" id="enotice">Banner</button>
+    <button type="button" id="ediscard">Discard</button>
+    <button type="button" id="epublish" class="primary" disabled>Publish</button>
+  </div>
+  <div id="notice" hidden></div>
   <div class="stack" style="gap:6px">
     <h1>Simran and Prat's Wedding Schedule</h1>
     <p class="t-sec">Paradisus Playa del Carmen · Oct 20–24, 2026 · Jakobz Media. Arrival times assume
@@ -315,25 +341,25 @@ footer { color: var(--t3); font-size: 12px; border-top: 1px solid var(--s3); pad
         <div class="cardbody">
           <div class="track"><div class="sunmark" style="left:20.652173913043477%" title="Sunrise 6:45 AM"><span><svg class="sunicon" viewBox="0 0 16 16" fill="none" aria-hidden="true"><g stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"><path d="M4.5 13.5a3.5 3.5 0 0 1 7 0"/><path d="M1.5 13.5h13"/><path d="M8 2.8v4.4"/><path d="M6.1 4.7 8 2.8l1.9 1.9"/></g></svg></span></div><div class="sunmark" style="left:71.08695652173913%" title="Sunset 6:21 PM"><span><svg class="sunicon" viewBox="0 0 16 16" fill="none" aria-hidden="true"><g stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"><path d="M4.5 13.5a3.5 3.5 0 0 1 7 0"/><path d="M1.5 13.5h13"/><path d="M8 2.8v4.4"/><path d="M6.1 5.3 8 7.2l1.9-1.9"/></g></svg></span></div><div class="arrival" style="left:65.21739130434783%"><span>Arrive 5:00 PM</span></div><div class="trackbar"><div class="blk blk-prep" style="left:43.47826086956522%;width:calc(56.52173913043478% - 43.47826086956522%)" title="Simran and Prat arrive">Simran and Prat arrive</div><div class="blk blk-prep" style="left:56.52173913043478%;width:calc(60.86956521739131% - 56.52173913043478%)" title="Check-in">Check-in</div><div class="blk blk-prep" style="left:61.95652173913043%;width:calc(66.30434782608695% - 61.95652173913043%)" title="Get ready">Get ready</div><div class="blk blk-shoot" style="left:66.30434782608695%;width:calc(71.73913043478261% - 66.30434782608695%)" title="Sunset e-shoot">Sunset e-shoot</div></div><div class="ticks"><span class="tick" style="left:0%">2 AM</span><span class="tick" style="left:8.695652173913043%">4 AM</span><span class="tick" style="left:17.391304347826086%">6 AM</span><span class="tick" style="left:26.08695652173913%">8 AM</span><span class="tick" style="left:34.78260869565217%">10 AM</span><span class="tick" style="left:43.47826086956522%">12 PM</span><span class="tick" style="left:52.17391304347826%">2 PM</span><span class="tick" style="left:60.86956521739131%">4 PM</span><span class="tick" style="left:69.56521739130434%">6 PM</span><span class="tick" style="left:78.26086956521739%">8 PM</span><span class="tick" style="left:86.95652173913044%">10 PM</span><span class="tick" style="left:95.65217391304348%">12 AM</span></div></div>
           <div class="rowhead"><span>Time</span><span>What</span><span>Source</span></div>
-          <div class="drow" data-who="Simran|Prat|Bride Family|Groom Family" data-expand="">
-        <span class=" ">12:00 PM – 3:00 PM (3 hr)</span>
-        <div class="whatcell"><span class=" ">Simran, Prat and immediate family arrive and settle in</span></div>
+          <div class="drow" data-rid="tue-0" data-who="Simran|Prat|Bride Family|Groom Family" data-expand="">
+        <span class="rtime  ">12:00 PM – 3:00 PM (3 hr)</span>
+        <div class="whatcell"><span class="rwhat  ">Simran, Prat and immediate family arrive and settle in</span></div>
         <span class="t-ter small">In timeline</span>
-      </div><div class="drow" data-who="Simran|Prat|Bride Family|Groom Family|Hotel" data-expand="">
-        <span class=" ">3:00 PM – 4:00 PM (1 hr)</span>
-        <div class="whatcell"><span class=" ">Room check-in</span></div>
+      </div><div class="drow" data-rid="tue-1" data-who="Simran|Prat|Bride Family|Groom Family|Hotel" data-expand="">
+        <span class="rtime  ">3:00 PM – 4:00 PM (1 hr)</span>
+        <div class="whatcell"><span class="rwhat  ">Room check-in</span></div>
         <span class="t-ter small">In timeline</span>
-      </div><div class="drow" data-who="Simran" data-expand="">
-        <span class="is-shoot ">4:15 PM – 5:15 PM (1 hr)</span>
-        <div class="whatcell"><span class="is-shoot ">Simran does her own makeup and hair for the e-shoot</span></div>
+      </div><div class="drow" data-rid="tue-2" data-who="Simran" data-expand="">
+        <span class="rtime is-shoot ">4:15 PM – 5:15 PM (1 hr)</span>
+        <div class="whatcell"><span class="rwhat is-shoot ">Simran does her own makeup and hair for the e-shoot</span></div>
         <span class="t-ter small">New</span>
-      </div><div class="drow" data-who="Jakobz Media" data-expand="">
-        <span class="is-shoot semib">5:00 PM – 5:15 PM (15 min)</span>
-        <div class="whatcell"><span class="is-shoot semib">Photo and video team arrives and sets up (on property since Oct 19)</span></div>
+      </div><div class="drow" data-rid="tue-3" data-who="Jakobz Media" data-expand="">
+        <span class="rtime is-shoot semib">5:00 PM – 5:15 PM (15 min)</span>
+        <div class="whatcell"><span class="rwhat is-shoot semib">Photo and video team arrives and sets up (on property since Oct 19)</span></div>
         <span class="t-ter small">New</span>
-      </div><div class="drow" data-who="Simran|Prat|Jakobz Media" data-expand="">
-        <span class="is-shoot ">5:15 PM – 6:30 PM (1 hr 15)</span>
-        <div class="whatcell"><span class="is-shoot ">Sunset e-shoot, outfit 2. Sunset is 6:21 PM, so golden hour runs roughly 5:45 to 6:21</span></div>
+      </div><div class="drow" data-rid="tue-4" data-who="Simran|Prat|Jakobz Media" data-expand="">
+        <span class="rtime is-shoot ">5:15 PM – 6:30 PM (1 hr 15)</span>
+        <div class="whatcell"><span class="rwhat is-shoot ">Sunset e-shoot, outfit 2. Sunset is 6:21 PM, so golden hour runs roughly 5:45 to 6:21</span></div>
         <span class="t-ter small">New</span>
       </div>
         </div>
@@ -354,37 +380,37 @@ footer { color: var(--t3); font-size: 12px; border-top: 1px solid var(--s3); pad
         <div class="cardbody">
           <div class="track"><div class="sunmark" style="left:20.652173913043477%" title="Sunrise 6:45 AM"><span><svg class="sunicon" viewBox="0 0 16 16" fill="none" aria-hidden="true"><g stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"><path d="M4.5 13.5a3.5 3.5 0 0 1 7 0"/><path d="M1.5 13.5h13"/><path d="M8 2.8v4.4"/><path d="M6.1 4.7 8 2.8l1.9 1.9"/></g></svg></span></div><div class="sunmark" style="left:71.01449275362319%" title="Sunset 6:20 PM"><span><svg class="sunicon" viewBox="0 0 16 16" fill="none" aria-hidden="true"><g stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"><path d="M4.5 13.5a3.5 3.5 0 0 1 7 0"/><path d="M1.5 13.5h13"/><path d="M8 2.8v4.4"/><path d="M6.1 5.3 8 7.2l1.9-1.9"/></g></svg></span></div><div class="arrival" style="left:16.304347826086957%"><span>Arrive 5:45 AM</span></div><div class="trackbar"><div class="blk blk-prep" style="left:13.043478260869565%;width:calc(17.391304347826086% - 13.043478260869565%)" title="Get ready">Get ready</div><div class="blk blk-shoot" style="left:17.391304347826086%;width:calc(22.82608695652174% - 17.391304347826086%)" title="Sunrise e-shoot">Sunrise e-shoot</div><div class="blk blk-prep tentative" style="left:39.130434782608695%;width:calc(47.82608695652174% - 39.130434782608695%)" title="Dashain tika (est.)">Dashain tika (est.)</div><div class="blk blk-prep" style="left:56.52173913043478%;width:calc(60.86956521739131% - 56.52173913043478%)" title="Check-in">Check-in</div><div class="blk blk-prep tentative" style="left:60.86956521739131%;width:calc(65.21739130434783% - 60.86956521739131%)" title="Pre-con (end TBD)">Pre-con (end TBD)</div></div><div class="ticks"><span class="tick" style="left:0%">2 AM</span><span class="tick" style="left:8.695652173913043%">4 AM</span><span class="tick" style="left:17.391304347826086%">6 AM</span><span class="tick" style="left:26.08695652173913%">8 AM</span><span class="tick" style="left:34.78260869565217%">10 AM</span><span class="tick" style="left:43.47826086956522%">12 PM</span><span class="tick" style="left:52.17391304347826%">2 PM</span><span class="tick" style="left:60.86956521739131%">4 PM</span><span class="tick" style="left:69.56521739130434%">6 PM</span><span class="tick" style="left:78.26086956521739%">8 PM</span><span class="tick" style="left:86.95652173913044%">10 PM</span><span class="tick" style="left:95.65217391304348%">12 AM</span></div></div>
           <div class="rowhead"><span>Time</span><span>What</span><span>Source</span></div>
-          <div class="drow" data-who="Simran" data-expand="">
-        <span class="is-shoot ">5:00 AM – 6:00 AM (1 hr)</span>
-        <div class="whatcell"><span class="is-shoot ">Simran does her own makeup and hair for the e-shoot</span></div>
+          <div class="drow" data-rid="wed-0" data-who="Simran" data-expand="">
+        <span class="rtime is-shoot ">5:00 AM – 6:00 AM (1 hr)</span>
+        <div class="whatcell"><span class="rwhat is-shoot ">Simran does her own makeup and hair for the e-shoot</span></div>
         <span class="t-ter small">New</span>
-      </div><div class="drow" data-who="Jakobz Media" data-expand="">
-        <span class="is-shoot semib">5:45 AM – 6:00 AM (15 min)</span>
-        <div class="whatcell"><span class="is-shoot semib">Photo and video team arrives and sets up</span></div>
+      </div><div class="drow" data-rid="wed-1" data-who="Jakobz Media" data-expand="">
+        <span class="rtime is-shoot semib">5:45 AM – 6:00 AM (15 min)</span>
+        <div class="whatcell"><span class="rwhat is-shoot semib">Photo and video team arrives and sets up</span></div>
         <span class="t-ter small">New</span>
-      </div><div class="drow" data-who="Simran|Prat|Jakobz Media" data-expand="">
-        <span class="is-shoot ">6:00 AM – 7:15 AM (1 hr 15)</span>
-        <div class="whatcell"><span class="is-shoot ">Sunrise e-shoot, outfit 1. Sunrise is 6:45 AM, so the first 45 minutes are before the sun is up — confirm with Jakobz whether they want that for blue hour or would rather start around 6:25</span></div>
+      </div><div class="drow" data-rid="wed-2" data-who="Simran|Prat|Jakobz Media" data-expand="">
+        <span class="rtime is-shoot ">6:00 AM – 7:15 AM (1 hr 15)</span>
+        <div class="whatcell"><span class="rwhat is-shoot ">Sunrise e-shoot, outfit 1. Sunrise is 6:45 AM, so the first 45 minutes are before the sun is up — confirm with Jakobz whether they want that for blue hour or would rather start around 6:25</span></div>
         <span class="t-ter small">New</span>
-      </div><div class="drow" data-who="Simran|Prat|Bride Family" data-expand="">
-        <span class=" ">11:00 AM – 1:00 PM (2 hr)</span>
-        <div class="whatcell"><span class=" ">Dashain tika (estimated time)</span></div>
+      </div><div class="drow" data-rid="wed-3" data-who="Simran|Prat|Bride Family" data-expand="">
+        <span class="rtime  ">11:00 AM – 1:00 PM (2 hr)</span>
+        <div class="whatcell"><span class="rwhat  ">Dashain tika (estimated time)</span></div>
         <span class="t-ter small">New</span>
-      </div><div class="drow" data-who="Guests" data-expand="">
-        <span class=" ">TBD (during the day)</span>
-        <div class="whatcell"><span class=" ">Guests arrive on the LOMAS Travels shuttle</span></div>
+      </div><div class="drow" data-rid="wed-4" data-who="Guests" data-expand="">
+        <span class="rtime  ">TBD (during the day)</span>
+        <div class="whatcell"><span class="rwhat  ">Guests arrive on the LOMAS Travels shuttle</span></div>
         <span class="t-ter small">In timeline</span>
-      </div><div class="drow" data-who="Simran|Prat|Bride Family|Groom Family|Destawed" data-expand="">
-        <span class=" ">TBD (not timed)</span>
-        <div class="whatcell"><span class=" ">Sort luggage and Destawed wedding items, steam outfits, tour and itinerary run-through with immediate family</span></div>
+      </div><div class="drow" data-rid="wed-5" data-who="Simran|Prat|Bride Family|Groom Family|Destawed" data-expand="">
+        <span class="rtime  ">TBD (not timed)</span>
+        <div class="whatcell"><span class="rwhat  ">Sort luggage and Destawed wedding items, steam outfits, tour and itinerary run-through with immediate family</span></div>
         <span class="t-ter small">In timeline</span>
-      </div><div class="drow" data-who="Guests|Hotel" data-expand="">
-        <span class=" ">3:00 PM – 4:00 PM (1 hr)</span>
-        <div class="whatcell"><span class=" ">Room check-in</span></div>
+      </div><div class="drow" data-rid="wed-6" data-who="Guests|Hotel" data-expand="">
+        <span class="rtime  ">3:00 PM – 4:00 PM (1 hr)</span>
+        <div class="whatcell"><span class="rwhat  ">Room check-in</span></div>
         <span class="t-ter small">In timeline</span>
-      </div><div class="drow" data-who="Simran|Prat|Destawed|Hotel" data-expand="">
-        <span class=" ">4:00 PM – 5:00 PM (1 hr)</span>
-        <div class="whatcell"><span class=" ">Destawed pre-con meeting (end time not listed, 1 hr assumed)</span></div>
+      </div><div class="drow" data-rid="wed-7" data-who="Simran|Prat|Destawed|Hotel" data-expand="">
+        <span class="rtime  ">4:00 PM – 5:00 PM (1 hr)</span>
+        <div class="whatcell"><span class="rwhat  ">Destawed pre-con meeting (end time not listed, 1 hr assumed)</span></div>
         <span class="t-ter small">In timeline</span>
       </div>
         </div>
@@ -405,41 +431,41 @@ footer { color: var(--t3); font-size: 12px; border-top: 1px solid var(--s3); pad
         <div class="cardbody">
           <div class="track"><div class="sunmark" style="left:20.652173913043477%" title="Sunrise 6:45 AM"><span><svg class="sunicon" viewBox="0 0 16 16" fill="none" aria-hidden="true"><g stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"><path d="M4.5 13.5a3.5 3.5 0 0 1 7 0"/><path d="M1.5 13.5h13"/><path d="M8 2.8v4.4"/><path d="M6.1 4.7 8 2.8l1.9 1.9"/></g></svg></span></div><div class="sunmark" style="left:70.94202898550725%" title="Sunset 6:19 PM"><span><svg class="sunicon" viewBox="0 0 16 16" fill="none" aria-hidden="true"><g stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"><path d="M4.5 13.5a3.5 3.5 0 0 1 7 0"/><path d="M1.5 13.5h13"/><path d="M8 2.8v4.4"/><path d="M6.1 5.3 8 7.2l1.9-1.9"/></g></svg></span></div><div class="arrival" style="left:35.869565217391305%"><span>Arrive 10:15 AM</span></div><div class="arrival" style="left:69.56521739130434%"><span>Arrive 6:00 PM</span></div><div class="trackbar"><div class="blk blk-prep" style="left:26.08695652173913%;width:calc(36.95652173913043% - 26.08695652173913%)" title="Bridal mehndi · main area">Bridal mehndi · main area</div><div class="blk blk-shoot" style="left:36.95652173913043%;width:calc(43.47826086956522% - 36.95652173913043%)" title="Mehndi content">Mehndi content</div><div class="blk blk-prep" style="left:43.47826086956522%;width:calc(50% - 43.47826086956522%)" title="Rest">Rest</div><div class="blk blk-prep" style="left:60.86956521739131%;width:calc(69.56521739130434% - 60.86956521739131%)" title="Makeup and hair">Makeup and hair</div><div class="blk blk-shoot" style="left:71.73913043478261%;width:calc(73.91304347826086% - 71.73913043478261%)" title="Couple shoot">Couple shoot</div><div class="blk blk-shoot" style="left:73.91304347826086%;width:calc(76.08695652173914% - 73.91304347826086%)" title="Family">Family</div><div class="blk blk-event" style="left:76.08695652173914%;width:calc(91.30434782608695% - 76.08695652173914%)" title="Welcome Party (from 7 PM)">Welcome Party (from 7 PM)</div></div><div class="ticks"><span class="tick" style="left:0%">2 AM</span><span class="tick" style="left:8.695652173913043%">4 AM</span><span class="tick" style="left:17.391304347826086%">6 AM</span><span class="tick" style="left:26.08695652173913%">8 AM</span><span class="tick" style="left:34.78260869565217%">10 AM</span><span class="tick" style="left:43.47826086956522%">12 PM</span><span class="tick" style="left:52.17391304347826%">2 PM</span><span class="tick" style="left:60.86956521739131%">4 PM</span><span class="tick" style="left:69.56521739130434%">6 PM</span><span class="tick" style="left:78.26086956521739%">8 PM</span><span class="tick" style="left:86.95652173913044%">10 PM</span><span class="tick" style="left:95.65217391304348%">12 AM</span></div></div>
           <div class="rowhead"><span>Time</span><span>What</span><span>Source</span></div>
-          <div class="drow" data-who="Simran|Mehndi artist|Guests" data-expand="">
-        <span class=" ">8:00 AM – 12:00 PM (4 hr)</span>
-        <div class="whatcell"><span class=" ">Bridal mehndi on a couch in the main resort area, guests drop by</span></div>
+          <div class="drow" data-rid="thu-0" data-who="Simran|Mehndi artist|Guests" data-expand="">
+        <span class="rtime  ">8:00 AM – 12:00 PM (4 hr)</span>
+        <div class="whatcell"><span class="rwhat  ">Bridal mehndi on a couch in the main resort area, guests drop by</span></div>
         <span class="t-ter small">New</span>
-      </div><div class="drow" data-who="Jakobz Media" data-expand="">
-        <span class="is-shoot semib">10:15 AM – 10:30 AM (15 min)</span>
-        <div class="whatcell"><span class="is-shoot semib">Photo and video team arrives and sets up</span></div>
+      </div><div class="drow" data-rid="thu-1" data-who="Jakobz Media" data-expand="">
+        <span class="rtime is-shoot semib">10:15 AM – 10:30 AM (15 min)</span>
+        <div class="whatcell"><span class="rwhat is-shoot semib">Photo and video team arrives and sets up</span></div>
         <span class="t-ter small">Proposed</span>
-      </div><div class="drow" data-who="Simran|Mehndi artist|Jakobz Media" data-expand="">
-        <span class="is-shoot ">10:30 AM – 12:00 PM (1 hr 30)</span>
-        <div class="whatcell"><span class="is-shoot ">Photo and video capture mehndi content, once the design is filled in and guests are stopping by</span></div>
+      </div><div class="drow" data-rid="thu-2" data-who="Simran|Mehndi artist|Jakobz Media" data-expand="">
+        <span class="rtime is-shoot ">10:30 AM – 12:00 PM (1 hr 30)</span>
+        <div class="whatcell"><span class="rwhat is-shoot ">Photo and video capture mehndi content, once the design is filled in and guests are stopping by</span></div>
         <span class="t-ter small">Proposed</span>
-      </div><div class="drow" data-who="Simran" data-expand="">
-        <span class=" ">12:00 PM – 1:30 PM (1 hr 30)</span>
-        <div class="whatcell"><span class=" ">Mehndi dries, lunch and rest</span></div>
+      </div><div class="drow" data-rid="thu-3" data-who="Simran" data-expand="">
+        <span class="rtime  ">12:00 PM – 1:30 PM (1 hr 30)</span>
+        <div class="whatcell"><span class="rwhat  ">Mehndi dries, lunch and rest</span></div>
         <span class="t-ter small">Proposed</span>
-      </div><div class="drow" data-who="Simran|MUAH" data-expand="">
-        <span class=" ">4:00 PM – 6:00 PM (2 hr)</span>
-        <div class="whatcell"><span class=" ">Simran's hair and makeup in her room, ready at 6:00 PM (2 hr, per Claudio's itinerary of Sep 29)</span></div>
+      </div><div class="drow" data-rid="thu-4" data-who="Simran|MUAH" data-expand="">
+        <span class="rtime  ">4:00 PM – 6:00 PM (2 hr)</span>
+        <div class="whatcell"><span class="rwhat  ">Simran's hair and makeup in her room, ready at 6:00 PM (2 hr, per Claudio's itinerary of Sep 29)</span></div>
         <span class="t-ter small">New</span>
-      </div><div class="drow" data-who="Jakobz Media" data-expand="">
-        <span class="is-shoot semib">6:00 PM – 6:30 PM (30 min)</span>
-        <div class="whatcell"><span class="is-shoot semib">Photo and video team arrives and sets up</span></div>
+      </div><div class="drow" data-rid="thu-5" data-who="Jakobz Media" data-expand="">
+        <span class="rtime is-shoot semib">6:00 PM – 6:30 PM (30 min)</span>
+        <div class="whatcell"><span class="rwhat is-shoot semib">Photo and video team arrives and sets up</span></div>
         <span class="t-ter small">Proposed</span>
-      </div><div class="drow" data-who="Simran|Prat|Jakobz Media" data-expand="">
-        <span class="is-shoot ">6:30 PM – 7:00 PM (30 min)</span>
-        <div class="whatcell"><span class="is-shoot ">Couple shoot, straight into the party</span></div>
+      </div><div class="drow" data-rid="thu-6" data-who="Simran|Prat|Jakobz Media" data-expand="">
+        <span class="rtime is-shoot ">6:30 PM – 7:00 PM (30 min)</span>
+        <div class="whatcell"><span class="rwhat is-shoot ">Couple shoot, straight into the party</span></div>
         <span class="t-ter small">Proposed</span>
-      </div><div class="drow" data-who="Simran|Prat|Guests|DJ / MC|Jakobz Media" data-expand="">
-        <span class="is-event semib">7:00 PM – 11:00 PM (4 hr)</span>
-        <div class="whatcell"><span class="is-event semib">Welcome Party</span></div>
+      </div><div class="drow" data-rid="thu-7" data-who="Simran|Prat|Guests|DJ / MC|Jakobz Media" data-expand="">
+        <span class="rtime is-event semib">7:00 PM – 11:00 PM (4 hr)</span>
+        <div class="whatcell"><span class="rwhat is-event semib">Welcome Party</span></div>
         <span class="t-ter small">In timeline</span>
-      </div><div class="drow" data-who="Simran|Prat|Bride Family|Groom Family|Jakobz Media" data-expand="">
-        <span class="is-shoot ">7:00 PM – 7:30 PM (30 min)</span>
-        <div class="whatcell"><span class="is-shoot ">Immediate family photos during the party, before the 8:00 PM program</span></div>
+      </div><div class="drow" data-rid="thu-8" data-who="Simran|Prat|Bride Family|Groom Family|Jakobz Media" data-expand="">
+        <span class="rtime is-shoot ">7:00 PM – 7:30 PM (30 min)</span>
+        <div class="whatcell"><span class="rwhat is-shoot ">Immediate family photos during the party, before the 8:00 PM program</span></div>
         <span class="t-ter small">New</span>
       </div>
         </div>
@@ -460,33 +486,33 @@ footer { color: var(--t3); font-size: 12px; border-top: 1px solid var(--s3); pad
         <div class="cardbody">
           <div class="track"><div class="sunmark" style="left:20.724637681159418%" title="Sunrise 6:46 AM"><span><svg class="sunicon" viewBox="0 0 16 16" fill="none" aria-hidden="true"><g stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"><path d="M4.5 13.5a3.5 3.5 0 0 1 7 0"/><path d="M1.5 13.5h13"/><path d="M8 2.8v4.4"/><path d="M6.1 4.7 8 2.8l1.9 1.9"/></g></svg></span></div><div class="sunmark" style="left:70.94202898550725%" title="Sunset 6:19 PM"><span><svg class="sunicon" viewBox="0 0 16 16" fill="none" aria-hidden="true"><g stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"><path d="M4.5 13.5a3.5 3.5 0 0 1 7 0"/><path d="M1.5 13.5h13"/><path d="M8 2.8v4.4"/><path d="M6.1 5.3 8 7.2l1.9-1.9"/></g></svg></span></div><div class="arrival" style="left:34.78260869565217%"><span>Arrive 10:00 AM</span></div><div class="arrival" style="left:60.86956521739131%"><span>Arrive 4:00 PM</span></div><div class="trackbar"><div class="blk blk-prep" style="left:26.08695652173913%;width:calc(30.434782608695656% - 26.08695652173913%)" title="Prat's milk bath">Prat's milk bath</div><div class="blk blk-prep" style="left:34.78260869565217%;width:calc(41.30434782608695% - 34.78260869565217%)" title="Ceremony rehearsal">Ceremony rehearsal</div><div class="blk blk-prep" style="left:52.17391304347826%;width:calc(60.86956521739131% - 52.17391304347826%)" title="Makeup and hair">Makeup and hair</div><div class="blk blk-shoot" style="left:63.04347826086957%;width:calc(67.3913043478261% - 63.04347826086957%)" title="Couple shoot">Couple shoot</div><div class="blk blk-shoot" style="left:67.3913043478261%;width:calc(69.56521739130434% - 67.3913043478261%)" title="Family">Family</div><div class="blk blk-event" style="left:69.56521739130434%;width:calc(86.95652173913044% - 69.56521739130434%)" title="Sangeet &amp; Mehndi">Sangeet &amp; Mehndi</div></div><div class="ticks"><span class="tick" style="left:0%">2 AM</span><span class="tick" style="left:8.695652173913043%">4 AM</span><span class="tick" style="left:17.391304347826086%">6 AM</span><span class="tick" style="left:26.08695652173913%">8 AM</span><span class="tick" style="left:34.78260869565217%">10 AM</span><span class="tick" style="left:43.47826086956522%">12 PM</span><span class="tick" style="left:52.17391304347826%">2 PM</span><span class="tick" style="left:60.86956521739131%">4 PM</span><span class="tick" style="left:69.56521739130434%">6 PM</span><span class="tick" style="left:78.26086956521739%">8 PM</span><span class="tick" style="left:86.95652173913044%">10 PM</span><span class="tick" style="left:95.65217391304348%">12 AM</span></div></div>
           <div class="rowhead"><span>Time</span><span>What</span><span>Source</span></div>
-          <div class="drow" data-who="Prat|Groom Family" data-expand="">
-        <span class=" ">8:00 AM – 9:00 AM (1 hr)</span>
-        <div class="whatcell"><span class=" ">Prat's milk bath, close family only</span></div>
+          <div class="drow" data-rid="fri-0" data-who="Prat|Groom Family" data-expand="">
+        <span class="rtime  ">8:00 AM – 9:00 AM (1 hr)</span>
+        <div class="whatcell"><span class="rwhat  ">Prat's milk bath, close family only</span></div>
         <span class="t-ter small">New</span>
-      </div><div class="drow" data-who="Simran|Prat|Bernardo|Bride Family|Groom Family" data-expand="">
-        <span class=" ">10:00 AM – 11:30 AM (1 hr 30)</span>
-        <div class="whatcell"><span class=" ">Ceremony rehearsal with Bernardo, immediate family only (no bridal party). Bernardo estimated an hour to an hour and a half</span></div>
+      </div><div class="drow" data-rid="fri-1" data-who="Simran|Prat|Bernardo|Bride Family|Groom Family" data-expand="">
+        <span class="rtime  ">10:00 AM – 11:30 AM (1 hr 30)</span>
+        <div class="whatcell"><span class="rwhat  ">Ceremony rehearsal with Bernardo, immediate family only (no bridal party). Bernardo estimated an hour to an hour and a half</span></div>
         <span class="t-ter small">New</span>
-      </div><div class="drow" data-who="Simran|MUAH" data-expand="">
-        <span class=" ">2:00 PM – 4:00 PM (2 hr)</span>
-        <div class="whatcell"><span class=" ">Simran's hair and makeup in her room, ready at 4:00 PM (2 hr, per Claudio's itinerary of Sep 29)</span></div>
+      </div><div class="drow" data-rid="fri-2" data-who="Simran|MUAH" data-expand="">
+        <span class="rtime  ">2:00 PM – 4:00 PM (2 hr)</span>
+        <div class="whatcell"><span class="rwhat  ">Simran's hair and makeup in her room, ready at 4:00 PM (2 hr, per Claudio's itinerary of Sep 29)</span></div>
         <span class="t-ter small">New</span>
-      </div><div class="drow" data-who="Jakobz Media" data-expand="">
-        <span class="is-shoot semib">4:00 PM – 4:30 PM (30 min)</span>
-        <div class="whatcell"><span class="is-shoot semib">Photo and video team arrives and sets up</span></div>
+      </div><div class="drow" data-rid="fri-3" data-who="Jakobz Media" data-expand="">
+        <span class="rtime is-shoot semib">4:00 PM – 4:30 PM (30 min)</span>
+        <div class="whatcell"><span class="rwhat is-shoot semib">Photo and video team arrives and sets up</span></div>
         <span class="t-ter small">Proposed</span>
-      </div><div class="drow" data-who="Simran|Prat|Jakobz Media" data-expand="">
-        <span class="is-shoot ">4:30 PM – 5:30 PM (1 hr)</span>
-        <div class="whatcell"><span class="is-shoot ">Couple shoot with photo and video team, straight into family photos</span></div>
+      </div><div class="drow" data-rid="fri-4" data-who="Simran|Prat|Jakobz Media" data-expand="">
+        <span class="rtime is-shoot ">4:30 PM – 5:30 PM (1 hr)</span>
+        <div class="whatcell"><span class="rwhat is-shoot ">Couple shoot with photo and video team, straight into family photos</span></div>
         <span class="t-ter small">Proposed</span>
-      </div><div class="drow" data-who="Simran|Prat|Bride Family|Groom Family|Jakobz Media" data-expand="">
-        <span class="is-shoot ">5:30 PM – 6:00 PM (30 min)</span>
-        <div class="whatcell"><span class="is-shoot ">Immediate family photos</span></div>
+      </div><div class="drow" data-rid="fri-5" data-who="Simran|Prat|Bride Family|Groom Family|Jakobz Media" data-expand="">
+        <span class="rtime is-shoot ">5:30 PM – 6:00 PM (30 min)</span>
+        <div class="whatcell"><span class="rwhat is-shoot ">Immediate family photos</span></div>
         <span class="t-ter small">New</span>
-      </div><div class="drow" data-who="Simran|Prat|Guests|DJ / MC|Jakobz Media|Mehndi artist" data-expand="">
-        <span class="is-event semib">6:00 PM – 10:00 PM (4 hr)</span>
-        <div class="whatcell"><span class="is-event semib">Sangeet &amp; Mehndi, pictures with each performance group</span></div>
+      </div><div class="drow" data-rid="fri-6" data-who="Simran|Prat|Guests|DJ / MC|Jakobz Media|Mehndi artist" data-expand="">
+        <span class="rtime is-event semib">6:00 PM – 10:00 PM (4 hr)</span>
+        <div class="whatcell"><span class="rwhat is-event semib">Sangeet &amp; Mehndi, pictures with each performance group</span></div>
         <span class="t-ter small">In timeline</span>
       </div>
         </div>
@@ -507,36 +533,36 @@ footer { color: var(--t3); font-size: 12px; border-top: 1px solid var(--s3); pad
         <div class="cardbody">
           <div class="track"><div class="sunmark" style="left:20.724637681159418%" title="Sunrise 6:46 AM"><span><svg class="sunicon" viewBox="0 0 16 16" fill="none" aria-hidden="true"><g stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"><path d="M4.5 13.5a3.5 3.5 0 0 1 7 0"/><path d="M1.5 13.5h13"/><path d="M8 2.8v4.4"/><path d="M6.1 4.7 8 2.8l1.9 1.9"/></g></svg></span></div><div class="sunmark" style="left:70.86956521739131%" title="Sunset 6:18 PM"><span><svg class="sunicon" viewBox="0 0 16 16" fill="none" aria-hidden="true"><g stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"><path d="M4.5 13.5a3.5 3.5 0 0 1 7 0"/><path d="M1.5 13.5h13"/><path d="M8 2.8v4.4"/><path d="M6.1 5.3 8 7.2l1.9-1.9"/></g></svg></span></div><div class="arrival" style="left:15.217391304347828%"><span>Arrive 5:30 AM</span></div><div class="arrival" style="left:69.56521739130434%"><span>Arrive 6:00 PM</span></div><div class="trackbar"><div class="blk blk-prep" style="left:4.3478260869565215%;width:calc(6.521739130434782% - 4.3478260869565215%)" title="Claudio sets up">Claudio sets up</div><div class="blk blk-prep" style="left:6.521739130434782%;width:calc(15.217391304347828% - 6.521739130434782%)" title="Makeup and hair">Makeup and hair</div><div class="blk blk-prep" style="left:15.217391304347828%;width:calc(17.391304347826086% - 15.217391304347828%)" title="Bindi + shawl pinning">Bindi + shawl pinning</div><div class="blk blk-shoot" style="left:19.565217391304348%;width:calc(30.434782608695656% - 19.565217391304348%)" title="First looks · vows · photos">First looks · vows · photos</div><div class="blk blk-event" style="left:32.608695652173914%;width:calc(34.78260869565217% - 32.608695652173914%)" title="Baraat">Baraat</div><div class="blk blk-event" style="left:34.78260869565217%;width:calc(43.84057971014493% - 34.78260869565217%)" title="Ceremony">Ceremony</div><div class="blk blk-prep" style="left:45.65217391304348%;width:calc(54.347826086956516% - 45.65217391304348%)" title="Guest lunch">Guest lunch</div><div class="blk blk-prep" style="left:54.347826086956516%;width:calc(58.69565217391305% - 54.347826086956516%)" title="Family gifts">Family gifts</div><div class="blk blk-prep" style="left:60.86956521739131%;width:calc(69.56521739130434% - 60.86956521739131%)" title="Makeup and hair">Makeup and hair</div><div class="blk blk-shoot" style="left:71.73913043478261%;width:calc(73.91304347826086% - 71.73913043478261%)" title="Family">Family</div><div class="blk blk-shoot" style="left:73.91304347826086%;width:calc(77.17391304347827% - 73.91304347826086%)" title="Couple">Couple</div><div class="blk blk-event" style="left:78.26086956521739%;width:calc(100% - 78.26086956521739%)" title="Reception">Reception</div></div><div class="ticks"><span class="tick" style="left:0%">2 AM</span><span class="tick" style="left:8.695652173913043%">4 AM</span><span class="tick" style="left:17.391304347826086%">6 AM</span><span class="tick" style="left:26.08695652173913%">8 AM</span><span class="tick" style="left:34.78260869565217%">10 AM</span><span class="tick" style="left:43.47826086956522%">12 PM</span><span class="tick" style="left:52.17391304347826%">2 PM</span><span class="tick" style="left:60.86956521739131%">4 PM</span><span class="tick" style="left:69.56521739130434%">6 PM</span><span class="tick" style="left:78.26086956521739%">8 PM</span><span class="tick" style="left:86.95652173913044%">10 PM</span><span class="tick" style="left:95.65217391304348%">12 AM</span></div></div>
           <div class="rowhead"><span>Time</span><span>What</span><span>Source</span></div>
-          <div class="drow" data-who="MUAH" data-expand="">
-        <span class=" ">3:00 AM – 3:30 AM (30 min)</span>
-        <div class="whatcell"><span class=" ">Claudio and the hairstylist arrive at the bridal suite and set up. Claudio's own notes say 3:00; the Oct 19 timeline says 3:15, which halves his setup window</span></div>
+          <div class="drow" data-rid="sat-0" data-who="MUAH" data-expand="">
+        <span class="rtime  ">3:00 AM – 3:30 AM (30 min)</span>
+        <div class="whatcell"><span class="rwhat  ">Claudio and the hairstylist arrive at the bridal suite and set up. Claudio's own notes say 3:00; the Oct 19 timeline says 3:15, which halves his setup window</span></div>
         <span class="t-ter small">New</span>
-      </div><div class="drow" data-who="Simran|MUAH" data-expand="">
-        <span class=" ">3:30 AM – 5:30 AM (2 hr)</span>
-        <div class="whatcell"><span class=" ">Simran's hair and makeup in the bridal suite (1 hr 30 plus 15 min for accessories)</span></div>
+      </div><div class="drow" data-rid="sat-1" data-who="Simran|MUAH" data-expand="">
+        <span class="rtime  ">3:30 AM – 5:30 AM (2 hr)</span>
+        <div class="whatcell"><span class="rwhat  ">Simran's hair and makeup in the bridal suite (1 hr 30 plus 15 min for accessories)</span></div>
         <span class="t-ter small">New</span>
-      </div><div class="drow" data-who="Prat|Groom Family" data-expand="">
-        <span class=" ">4:30 AM – 6:00 AM (1 hr 30)</span>
-        <div class="whatcell"><span class=" ">Prat's prep: turban tying or pre-made turban, his mom and Praveena help with the outfit</span></div>
+      </div><div class="drow" data-rid="sat-2" data-who="Prat|Groom Family" data-expand="">
+        <span class="rtime  ">4:30 AM – 6:00 AM (1 hr 30)</span>
+        <div class="whatcell"><span class="rwhat  ">Prat's prep: turban tying or pre-made turban, his mom and Praveena help with the outfit</span></div>
         <span class="t-ter small">In timeline</span>
-      </div><div class="drow" data-who="Simran|Prat|Hotel" data-expand="">
-        <span class=" ">5:00 AM – 5:15 AM (15 min)</span>
-        <div class="whatcell"><span class=" ">Vegetarian breakfast sent to both rooms and the bridal suite (ordered with Ingrid)</span></div>
+      </div><div class="drow" data-rid="sat-3" data-who="Simran|Prat|Hotel" data-expand="">
+        <span class="rtime  ">5:00 AM – 5:15 AM (15 min)</span>
+        <div class="whatcell"><span class="rwhat  ">Vegetarian breakfast sent to both rooms and the bridal suite (ordered with Ingrid)</span></div>
         <span class="t-ter small">In timeline</span>
-      </div><div class="drow" data-who="Simran|MUAH|Jakobz Media" data-expand="">
-        <span class=" ">5:30 AM – 6:00 AM (30 min)</span>
-        <div class="whatcell"><span class=" ">Bindi and shawl pinning, ready by 6:00 AM</span></div>
+      </div><div class="drow" data-rid="sat-4" data-who="Simran|MUAH|Jakobz Media" data-expand="">
+        <span class="rtime  ">5:30 AM – 6:00 AM (30 min)</span>
+        <div class="whatcell"><span class="rwhat  ">Bindi and shawl pinning, ready by 6:00 AM</span></div>
         <span class="t-ter small">New</span>
-      </div><div class="drow" data-who="Jakobz Media" data-expand="">
-        <span class="is-shoot ">5:30 AM – 6:15 AM (45 min)</span>
-        <div class="whatcell"><span class="is-shoot ">Photo and video team in both rooms for detail and getting-ready shots: Mumum fixes the chunni, bridesmaids in robes, and reaction footage of Mumum, Bobbu Annie and Baba Annie watching Simran get ready</span></div>
+      </div><div class="drow" data-rid="sat-5" data-who="Jakobz Media" data-expand="">
+        <span class="rtime is-shoot ">5:30 AM – 6:15 AM (45 min)</span>
+        <div class="whatcell"><span class="rwhat is-shoot ">Photo and video team in both rooms for detail and getting-ready shots: Mumum fixes the chunni, bridesmaids in robes, and reaction footage of Mumum, Bobbu Annie and Baba Annie watching Simran get ready</span></div>
         <span class="t-ter small">In timeline</span>
-      </div><div class="drow" data-who="Simran|Prat|Jakobz Media|Bridesmaids" data-expand="">
-        <span class=" ">6:30 AM – 6:45 AM (15 min)</span>
-        <div class="whatcell"><span class=" ">Travel to the La Perla gazebo</span></div>
+      </div><div class="drow" data-rid="sat-6" data-who="Simran|Prat|Jakobz Media|Bridesmaids" data-expand="">
+        <span class="rtime  ">6:30 AM – 6:45 AM (15 min)</span>
+        <div class="whatcell"><span class="rwhat  ">Travel to the La Perla gazebo</span></div>
         <span class="t-ter small">In timeline</span>
-      </div><div class="drow" data-who="Simran|Prat|Jakobz Media|Bridesmaids|Groomsmen|Bride Family|Groom Family" data-expand="prephotos">
-        <span class="is-shoot ">6:45 AM – 9:00 AM (2 hr 15)</span>
+      </div><div class="drow" data-rid="sat-7" data-who="Simran|Prat|Jakobz Media|Bridesmaids|Groomsmen|Bride Family|Groom Family" data-expand="prephotos">
+        <span class="rtime is-shoot ">6:45 AM – 9:00 AM (2 hr 15)</span>
         <div class="whatcell"><details class="ros" id="sat-prephotos">
     <summary><span class="chev" aria-hidden="true">›</span><span class="rostitle">Pre-ceremony photo shoot</span><span class="rotrail">Before the 9:00 AM baraat</span></summary>
     <div class="rosbody">
@@ -573,36 +599,36 @@ footer { color: var(--t3); font-size: 12px; border-top: 1px solid var(--s3); pad
     </div>
   </details></div>
         <span class="t-ter small">In timeline</span>
-      </div><div class="drow" data-who="MUAH" data-expand="">
-        <span class="is-shoot ">6:45 AM – 8:30 AM (1 hr 45)</span>
-        <div class="whatcell"><span class="is-shoot ">Claudio on call for touch-ups (no extra cost). He offered 6:30 to 8:30, so the last half hour of the shoot falls outside it — ask whether he'll stay to 9:00</span></div>
+      </div><div class="drow" data-rid="sat-8" data-who="MUAH" data-expand="">
+        <span class="rtime is-shoot ">6:45 AM – 8:30 AM (1 hr 45)</span>
+        <div class="whatcell"><span class="rwhat is-shoot ">Claudio on call for touch-ups (no extra cost). He offered 6:30 to 8:30, so the last half hour of the shoot falls outside it — ask whether he'll stay to 9:00</span></div>
         <span class="t-ter small">New</span>
-      </div><div class="drow" data-who="Guests" data-expand="">
-        <span class=" ">9:00 AM – 9:30 AM (30 min)</span>
-        <div class="whatcell"><span class=" ">Guests arrive (told 9:00 AM, half an hour before the baraat, so late arrivals don't delay it)</span></div>
+      </div><div class="drow" data-rid="sat-9" data-who="Guests" data-expand="">
+        <span class="rtime  ">9:00 AM – 9:30 AM (30 min)</span>
+        <div class="whatcell"><span class="rwhat  ">Guests arrive (told 9:00 AM, half an hour before the baraat, so late arrivals don't delay it)</span></div>
         <span class="t-ter small">New</span>
-      </div><div class="drow" data-who="Simran|MUAH" data-expand="">
-        <span class=" ">9:00 AM – 10:00 AM (1 hr)</span>
-        <div class="whatcell"><span class=" ">Claudio does makeup touch-ups and pins the veil as the final look. Simran's entrance isn't until 10:27, so his full hour fits</span></div>
+      </div><div class="drow" data-rid="sat-10" data-who="Simran|MUAH" data-expand="">
+        <span class="rtime  ">9:00 AM – 10:00 AM (1 hr)</span>
+        <div class="whatcell"><span class="rwhat  ">Claudio does makeup touch-ups and pins the veil as the final look. Simran's entrance isn't until 10:27, so his full hour fits</span></div>
         <span class="t-ter small">In timeline</span>
-      </div><div class="drow" data-who="Prat|Groom Family|Groomsmen" data-expand="">
-        <span class=" ">9:15 AM – 9:30 AM (15 min)</span>
-        <div class="whatcell"><span class=" ">Groom's side meets in the lobby</span></div>
+      </div><div class="drow" data-rid="sat-11" data-who="Prat|Groom Family|Groomsmen" data-expand="">
+        <span class="rtime  ">9:15 AM – 9:30 AM (15 min)</span>
+        <div class="whatcell"><span class="rwhat  ">Groom's side meets in the lobby</span></div>
         <span class="t-ter small">In timeline</span>
-      </div><div class="drow" data-who="Bride Family|Hotel" data-expand="">
-        <span class=" ">9:30 AM – 9:45 AM (15 min)</span>
-        <div class="whatcell"><span class=" ">Bride's side meets at the venue. Coconut station set up at the entrance at 45 degrees, finished by 9:30</span></div>
+      </div><div class="drow" data-rid="sat-12" data-who="Bride Family|Hotel" data-expand="">
+        <span class="rtime  ">9:30 AM – 9:45 AM (15 min)</span>
+        <div class="whatcell"><span class="rwhat  ">Bride's side meets at the venue. Coconut station set up at the entrance at 45 degrees, finished by 9:30</span></div>
         <span class="t-ter small">In timeline</span>
-      </div><div class="drow" data-who="Prat|Groom Family|Groomsmen|Guests|Jakobz Media" data-expand="">
-        <span class="is-event semib">9:30 AM – 10:00 AM (30 min)</span>
-        <div class="whatcell"><span class="is-event semib">Baraat: Prat's procession sets off from the North Bar and dances to the Kanna Bridge, likely 20 to 30 minutes. Colour bombs go off outside on the planner's count. It has to arrive by 10:00</span></div>
+      </div><div class="drow" data-rid="sat-13" data-who="Prat|Groom Family|Groomsmen|Guests|Jakobz Media" data-expand="">
+        <span class="rtime is-event semib">9:30 AM – 10:00 AM (30 min)</span>
+        <div class="whatcell"><span class="rwhat is-event semib">Baraat: Prat's procession sets off from the North Bar and dances to the Kanna Bridge, likely 20 to 30 minutes. Colour bombs go off outside on the planner's count. It has to arrive by 10:00</span></div>
         <span class="t-ter small">In timeline</span>
-      </div><div class="drow" data-who="Simran|Bridesmaids" data-expand="">
-        <span class=" ">10:15 AM – 10:27 AM (12 min)</span>
-        <div class="whatcell"><span class=" ">Simran waits out of sight with the bridesmaids until her entrance</span></div>
+      </div><div class="drow" data-rid="sat-14" data-who="Simran|Bridesmaids" data-expand="">
+        <span class="rtime  ">10:15 AM – 10:27 AM (12 min)</span>
+        <div class="whatcell"><span class="rwhat  ">Simran waits out of sight with the bridesmaids until her entrance</span></div>
         <span class="t-ter small">Derived</span>
-      </div><div class="drow" data-who="Simran|Prat|Bernardo|Bride Family|Groom Family|Bridesmaids|Groomsmen|Guests|Jakobz Media" data-expand="ceremony">
-        <span class="is-event semib">10:00 AM – 12:05 PM (2 hr 5)</span>
+      </div><div class="drow" data-rid="sat-15" data-who="Simran|Prat|Bernardo|Bride Family|Groom Family|Bridesmaids|Groomsmen|Guests|Jakobz Media" data-expand="ceremony">
+        <span class="rtime is-event semib">10:00 AM – 12:05 PM (2 hr 5)</span>
         <div class="whatcell"><details class="ros" id="sat-ceremony">
     <summary><span class="chev" aria-hidden="true">›</span><span class="rostitle">Ceremony · ritual by ritual</span><span class="rotrail">Kanna Bridge</span></summary>
     <div class="rosbody">
@@ -663,36 +689,36 @@ footer { color: var(--t3); font-size: 12px; border-top: 1px solid var(--s3); pad
     </div>
   </details></div>
         <span class="t-ter small">In timeline</span>
-      </div><div class="drow" data-who="Simran|Prat|Bride Family|Groom Family|Guests|Jakobz Media" data-expand="">
-        <span class="is-shoot ">12:05 PM – 12:35 PM (30 min)</span>
-        <div class="whatcell"><span class="is-shoot ">Petal toss on the exit, then family photos. No post-ceremony rituals</span></div>
+      </div><div class="drow" data-rid="sat-16" data-who="Simran|Prat|Bride Family|Groom Family|Guests|Jakobz Media" data-expand="">
+        <span class="rtime is-shoot ">12:05 PM – 12:35 PM (30 min)</span>
+        <div class="whatcell"><span class="rwhat is-shoot ">Petal toss on the exit, then family photos. No post-ceremony rituals</span></div>
         <span class="t-ter small">New</span>
-      </div><div class="drow" data-who="Guests|Hotel" data-expand="">
-        <span class=" ">12:30 PM – 2:30 PM (2 hr)</span>
-        <div class="whatcell"><span class=" ">Post-ceremony lunch in the ballroom, open for guests (Simran and Prat don't need to be there)</span></div>
+      </div><div class="drow" data-rid="sat-17" data-who="Guests|Hotel" data-expand="">
+        <span class="rtime  ">12:30 PM – 2:30 PM (2 hr)</span>
+        <div class="whatcell"><span class="rwhat  ">Post-ceremony lunch in the ballroom, open for guests (Simran and Prat don't need to be there)</span></div>
         <span class="t-ter small">In timeline</span>
-      </div><div class="drow" data-who="Simran|Prat|Bride Family|Groom Family" data-expand="">
-        <span class=" ">2:30 PM – 3:30 PM (1 hr)</span>
-        <div class="whatcell"><span class=" ">Bride's side gives gifts to the groom's side in their room</span></div>
+      </div><div class="drow" data-rid="sat-18" data-who="Simran|Prat|Bride Family|Groom Family" data-expand="">
+        <span class="rtime  ">2:30 PM – 3:30 PM (1 hr)</span>
+        <div class="whatcell"><span class="rwhat  ">Bride's side gives gifts to the groom's side in their room</span></div>
         <span class="t-ter small">New</span>
-      </div><div class="drow" data-who="Simran|MUAH" data-expand="">
-        <span class=" ">4:00 PM – 6:00 PM (2 hr)</span>
-        <div class="whatcell"><span class=" ">Simran's hair and makeup for the reception, back in her own room. Ready and fully dressed at 6:00 PM (2 hr, per Claudio's itinerary of Sep 29)</span></div>
+      </div><div class="drow" data-rid="sat-19" data-who="Simran|MUAH" data-expand="">
+        <span class="rtime  ">4:00 PM – 6:00 PM (2 hr)</span>
+        <div class="whatcell"><span class="rwhat  ">Simran's hair and makeup for the reception, back in her own room. Ready and fully dressed at 6:00 PM (2 hr, per Claudio's itinerary of Sep 29)</span></div>
         <span class="t-ter small">New</span>
-      </div><div class="drow" data-who="Jakobz Media" data-expand="">
-        <span class="is-shoot semib">6:00 PM – 6:30 PM (30 min)</span>
-        <div class="whatcell"><span class="is-shoot semib">Photo and video team arrives and sets up</span></div>
+      </div><div class="drow" data-rid="sat-20" data-who="Jakobz Media" data-expand="">
+        <span class="rtime is-shoot semib">6:00 PM – 6:30 PM (30 min)</span>
+        <div class="whatcell"><span class="rwhat is-shoot semib">Photo and video team arrives and sets up</span></div>
         <span class="t-ter small">Proposed</span>
-      </div><div class="drow" data-who="Simran|Prat|Bride Family|Groom Family|Jakobz Media" data-expand="">
-        <span class="is-shoot ">6:30 PM – 7:00 PM (30 min)</span>
-        <div class="whatcell"><span class="is-shoot ">Close family photos, reception outfits</span></div>
+      </div><div class="drow" data-rid="sat-21" data-who="Simran|Prat|Bride Family|Groom Family|Jakobz Media" data-expand="">
+        <span class="rtime is-shoot ">6:30 PM – 7:00 PM (30 min)</span>
+        <div class="whatcell"><span class="rwhat is-shoot ">Close family photos, reception outfits</span></div>
         <span class="t-ter small">Proposed</span>
-      </div><div class="drow" data-who="Simran|Prat|Jakobz Media" data-expand="">
-        <span class="is-shoot ">7:00 PM – 7:45 PM (45 min)</span>
-        <div class="whatcell"><span class="is-shoot ">Couple portraits during cocktail hour (Simran and Prat skip cocktails)</span></div>
+      </div><div class="drow" data-rid="sat-22" data-who="Simran|Prat|Jakobz Media" data-expand="">
+        <span class="rtime is-shoot ">7:00 PM – 7:45 PM (45 min)</span>
+        <div class="whatcell"><span class="rwhat is-shoot ">Couple portraits during cocktail hour (Simran and Prat skip cocktails)</span></div>
         <span class="t-ter small">New</span>
-      </div><div class="drow" data-who="Simran|Prat|Guests|DJ / MC|Jakobz Media" data-expand="reception">
-        <span class="is-event semib">7:00 PM – 1:00 AM (6 hr)</span>
+      </div><div class="drow" data-rid="sat-23" data-who="Simran|Prat|Guests|DJ / MC|Jakobz Media" data-expand="reception">
+        <span class="rtime is-event semib">7:00 PM – 1:00 AM (6 hr)</span>
         <div class="whatcell"><details class="ros" id="sat-reception">
     <summary><span class="chev" aria-hidden="true">›</span><span class="rostitle">Reception · full run of show</span><span class="rotrail">Ballroom · black tie</span></summary>
     <div class="rosbody">
@@ -1491,6 +1517,217 @@ Photo and video · New"
       wrapEl.classList.add("withdetail");
     });
   });
+})();
+</script>
+
+<script>
+/* Live overrides. The page below is generated and never edited by hand; anything changed
+   from the site itself lands in overrides.json and is layered on top at load. Add ?edit=1
+   to the URL to get the editing bar. */
+(function () {
+  var REPO = "simkhanal0815/wedding-week-plan";
+  var FILE = "overrides.json";
+  var API = "https://api.github.com/repos/" + REPO + "/contents/" + FILE;
+  var TKEY = "wwp-edit-token";
+
+  var editing = /[?&]edit=1/.test(location.search);
+  var data = { notice: "", rows: {} };
+  var sha = null;
+
+  function txt(el) { return (el.textContent || "").replace(/\s+/g, " ").trim(); }
+  function byId(id) { return document.getElementById(id); }
+
+  /* Remember the generated text before anything is layered over it, so an override can
+     tell whether the row underneath has since been rebuilt and changed. */
+  document.querySelectorAll(".drow").forEach(function (row) {
+    ["rtime", "rwhat"].forEach(function (cls) {
+      var el = row.querySelector("." + cls);
+      if (el) el.dataset.base = txt(el);
+    });
+  });
+
+  function parts(rid) {
+    var row = document.querySelector('[data-rid="' + rid + '"]');
+    if (!row) return null;
+    return { row: row, rtime: row.querySelector(".rtime"), rwhat: row.querySelector(".rwhat") };
+  }
+
+  function drawNotice() {
+    var n = byId("notice");
+    if (!n) return;
+    n.textContent = "";
+    if (!data.notice) { n.hidden = true; return; }
+    var b = document.createElement("b");
+    b.textContent = "Update";
+    n.appendChild(b);
+    n.appendChild(document.createTextNode(data.notice));
+    n.hidden = false;
+  }
+
+  function applyAll() {
+    var stale = [];
+    Object.keys(data.rows || {}).forEach(function (rid) {
+      var ov = data.rows[rid] || {};
+      var p = parts(rid);
+      if (!p) { stale.push(rid); return; }
+      /* If the generated row no longer matches what was edited, the schedule was rebuilt
+         underneath this override. Leave the new text alone rather than overwrite it. */
+      if (ov.base && p.rwhat && p.rwhat.dataset.base !== ov.base) { stale.push(rid); return; }
+      ["rtime", "rwhat"].forEach(function (cls) {
+        var key = cls === "rtime" ? "time" : "what";
+        if (ov[key] && p[cls]) { p[cls].textContent = ov[key]; p[cls].classList.add("edited"); }
+      });
+    });
+    drawNotice();
+    return stale;
+  }
+
+  /* ---------- edit mode ---------- */
+  function status(msg) { var e = byId("estat"); if (e) e.textContent = msg; }
+
+  function pending() {
+    var n = Object.keys(data.rows || {}).length;
+    return n === 1 ? "1 row edited." : n + " rows edited.";
+  }
+
+  function touched() {
+    var b = byId("epublish");
+    if (b) b.disabled = false;
+    status(pending() + " Not live until you publish.");
+  }
+
+  function enableEditing() {
+    document.body.classList.add("editing");
+    var bar = byId("editbar");
+    if (bar) bar.hidden = false;
+
+    document.querySelectorAll(".drow").forEach(function (row) {
+      var rid = row.dataset.rid;
+      if (!rid) return;
+      ["rtime", "rwhat"].forEach(function (cls) {
+        var el = row.querySelector("." + cls);
+        if (!el) return;
+        el.setAttribute("contenteditable", "true");
+        el.addEventListener("keydown", function (ev) {
+          if (ev.key === "Enter") { ev.preventDefault(); el.blur(); }
+        });
+        el.addEventListener("blur", function () {
+          var now = txt(el);
+          var ov = data.rows[rid] || {};
+          var key = cls === "rtime" ? "time" : "what";
+          if (now === el.dataset.base) { delete ov[key]; el.classList.remove("edited"); }
+          else { ov[key] = now; el.classList.add("edited"); }
+          var w = row.querySelector(".rwhat");
+          if (w) ov.base = w.dataset.base;
+          if (ov.time || ov.what) data.rows[rid] = ov;
+          else delete data.rows[rid];
+          touched();
+        });
+      });
+    });
+
+    var nb = byId("enotice");
+    if (nb) nb.addEventListener("click", function () {
+      var v = prompt("Banner across the top of the page, visible to everyone. Empty removes it.", data.notice || "");
+      if (v === null) return;
+      data.notice = v.trim();
+      drawNotice();
+      touched();
+    });
+
+    var db = byId("ediscard");
+    if (db) db.addEventListener("click", function () {
+      if (!confirm("Remove every edit and banner, putting the page back to the generated schedule? This publishes the reset.")) return;
+      data.rows = {};
+      data.notice = "";
+      publish(true);
+    });
+
+    var pb = byId("epublish");
+    if (pb) pb.addEventListener("click", function () { publish(false); });
+  }
+
+  function b64(str) {
+    var bytes = new TextEncoder().encode(str), out = "";
+    for (var i = 0; i < bytes.length; i++) out += String.fromCharCode(bytes[i]);
+    return btoa(out);
+  }
+
+  function token(force) {
+    var t = force ? null : localStorage.getItem(TKEY);
+    if (!t) {
+      t = prompt("GitHub token with Contents write access to wedding-week-plan. Stored only in this browser.");
+      if (t) { t = t.trim(); localStorage.setItem(TKEY, t); }
+    }
+    return t;
+  }
+
+  function publish(isReset) {
+    var t = token(false);
+    if (!t) return;
+    var btn = byId("epublish");
+    if (btn) btn.disabled = true;
+    status("Publishing...");
+    data.updated = new Date().toISOString();
+    var body = {
+      message: isReset ? "Clear schedule overrides" : "Schedule update from the site",
+      content: b64(JSON.stringify(data, null, 2)),
+    };
+    if (sha) body.sha = sha;
+    fetch(API, {
+      method: "PUT",
+      headers: { Authorization: "Bearer " + t, Accept: "application/vnd.github+json" },
+      body: JSON.stringify(body),
+    })
+      .then(function (r) {
+        if (r.status === 401 || r.status === 403) {
+          localStorage.removeItem(TKEY);
+          throw new Error("Token was rejected. Press Publish again to enter a new one.");
+        }
+        if (r.status === 409 || r.status === 422) {
+          throw new Error("Someone else published since this page loaded. Reload and redo the edit.");
+        }
+        if (!r.ok) throw new Error("GitHub returned " + r.status + ".");
+        return r.json();
+      })
+      .then(function (j) {
+        sha = j && j.content && j.content.sha;
+        status(isReset ? "Reset published. Reloading..." : "Published. The live page catches up in about a minute.");
+        if (isReset) setTimeout(function () { location.reload(); }, 1200);
+      })
+      .catch(function (e) {
+        if (btn) btn.disabled = false;
+        status(e.message);
+      });
+  }
+
+  function loadSha() {
+    fetch(API + "?cb=" + Date.now(), { cache: "no-store" })
+      .then(function (r) { return r.ok ? r.json() : null; })
+      .then(function (j) { if (j) sha = j.sha; })
+      .catch(function () {});
+  }
+
+  fetch(FILE + "?cb=" + Date.now(), { cache: "no-store" })
+    .then(function (r) { return r.ok ? r.json() : null; })
+    .then(function (j) {
+      if (j && typeof j === "object") {
+        data = j;
+        if (!data.rows) data.rows = {};
+        if (!data.notice) data.notice = "";
+      }
+    })
+    .catch(function () {})
+    .then(function () {
+      var stale = applyAll();
+      if (editing) {
+        loadSha();
+        enableEditing();
+        status(stale.length
+          ? pending() + " " + stale.length + " edit(s) skipped, their rows were rebuilt."
+          : (Object.keys(data.rows).length ? pending() + " All live." : "No changes yet."));
+      }
+    });
 })();
 </script>
 </body>
